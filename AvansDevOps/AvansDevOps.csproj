@@ -7,4 +7,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Program.cs\**" />
+    <EmbeddedResource Remove="Program.cs\**" />
+    <None Remove="Program.cs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BacklogState\" />
+    <Folder Include="SprintFactory\" />
+  </ItemGroup>
+
 </Project>
