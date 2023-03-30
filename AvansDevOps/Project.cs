@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps
 {
-    internal class Project
+    public class Project
     {
+        public string Name { get; set; }
+        public List<BacklogItem> BacklogItems { get; set; } = new();
+        public List<Pipeline> Pipelines { get; set; } = new();
     }
 }

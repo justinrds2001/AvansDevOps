@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps
 {
-    internal class BacklogItem
+    public class BacklogItem
     {
     }
 }

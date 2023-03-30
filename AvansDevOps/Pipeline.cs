@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps.Composite
+namespace AvansDevOps
 {
-    public interface IThreadComposite
+    public class Pipeline
     {
     }
 }

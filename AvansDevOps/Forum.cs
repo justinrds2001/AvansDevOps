@@ -1,12 +1,13 @@
-﻿using System;
+﻿using AvansDevOps.Composite;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace AvansDevOps
+
+namespace AvansDevOps.Observer
 {
-    internal class Forum
+    public class Forum
     {
+        public List<DiscussionThread> Threads { get; set; } = new();
     }
 }

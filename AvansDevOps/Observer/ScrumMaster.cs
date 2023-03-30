@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Observer
 {
-    internal class ScrumMaster
+    public class ScrumMaster : Participant
     {
     }
 }

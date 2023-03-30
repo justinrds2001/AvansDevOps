@@ -8,24 +8,24 @@ namespace AvansDevOps.Observer
 {
     public abstract class Publisher
     {
-        private readonly List<ISubsriber> _subscribers = new();
+        public List<ISubsriber> Subscribers { get; set; }
 
         // add subscriber method
         public void Subscribe(ISubsriber subscriber)
         {
-            _subscribers.Add(subscriber);
+            Subscribers.Add(subscriber);
         }
 
         // remove subscriber method
         public void Unsubscribe(ISubsriber subscriber)
         {
-            _subscribers.Remove(subscriber);
+            Subscribers.Remove(subscriber);
         }
 
         // notify subscribers method
         public void NotifySubscribers()
         {
-            foreach (var subscriber in _subscribers)
+            foreach (var subscriber in Subscribers)
             {
                 subscriber.Notify();
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.BacklogState
 {
-    public class TestingState
+    public class TestingState : IBacklogState
     {
     }
 }

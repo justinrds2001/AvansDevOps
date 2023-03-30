@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.SprintState
 {
-    public class FinishedState
+    public class FinishedState : ISprintState
     {
     }
 }
