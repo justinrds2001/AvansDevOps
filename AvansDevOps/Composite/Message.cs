@@ -13,5 +13,20 @@ namespace AvansDevOps.Composite
         {
             visitor.VisitMessage(this);
         }
+
+        public override string GetString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Remove(DiscussionThreadComponent discussionThreadComponent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Replace(DiscussionThreadComponent oldDiscussionThreadComponent, DiscussionThreadComponent newDiscussionThreadComponent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

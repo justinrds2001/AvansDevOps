@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.SprintFactory
 {
-    public class ReviewSprintFactory
+    public class ReviewSprintFactory : SprintFactory
     {
+        public Sprint CreateSprint()
+        {
+            return new ReviewSprint
+            {
+
+            };
+        }
     }
 }

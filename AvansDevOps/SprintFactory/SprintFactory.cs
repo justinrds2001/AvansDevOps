@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.SprintFactory
 {
-    public class SprintFactory
+    public interface SprintFactory
     {
+        public Sprint CreateSprint();
     }
 }

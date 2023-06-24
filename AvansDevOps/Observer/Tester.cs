@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Observer
 {
-    public class Developer : Contributor
+    public class Tester : Contributor
     {
-
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.SprintFactory
 {
-    public class ReleaseSprint
+    public class ReleaseSprint : Sprint
     {
+        public void CreateSprint()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace AvansDevOps.Composite
 {
     public class DiscussionThread : DiscussionThreadComponent
     {
-        private List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; }
+        public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; }
 
         public DiscussionThread()
         {

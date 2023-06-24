@@ -8,5 +8,6 @@ namespace AvansDevOps.SprintState
 {
     public class FinishedState : ISprintState
     {
+
     }
 }
