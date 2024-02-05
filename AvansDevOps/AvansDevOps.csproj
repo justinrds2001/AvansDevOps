@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SprintFactory\" />
+    <Folder Include="ISprintFactory\" />
   </ItemGroup>
 
 </Project>

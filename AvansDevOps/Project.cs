@@ -1,4 +1,4 @@
-﻿using AvansDevOps.SprintFactory;
+﻿using AvansDevOps.ISprintFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;

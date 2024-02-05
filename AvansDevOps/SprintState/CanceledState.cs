@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AvansDevOps.SprintFactory;
+using AvansDevOps.ISprintFactory;
 
 namespace AvansDevOps.SprintState
 {
@@ -19,7 +19,7 @@ namespace AvansDevOps.SprintState
             Console.WriteLine("The sprint is already closed!");
         }
 
-        public void ReviewSprint(bool approvedDeployement = false)
+        public void ReviewSprint(bool isApproved = false)
         {
             Console.WriteLine("The sprint is already closed!");
         }

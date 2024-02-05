@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AvansDevOps.SprintFactory;
+using AvansDevOps.ISprintFactory;
 
 namespace AvansDevOps.SprintState
 {
@@ -21,7 +21,7 @@ namespace AvansDevOps.SprintState
             Console.WriteLine("Sprint has to be started first.");
         }
 
-        public void ReviewSprint(bool approvedDeployement = false)
+        public void ReviewSprint(bool isApproved = false)
         {
             Console.WriteLine("Sprint has to be started first.");
         }

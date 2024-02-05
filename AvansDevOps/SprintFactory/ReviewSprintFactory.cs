@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps.SprintFactory
+namespace AvansDevOps.ISprintFactory
 {
-    public class ReviewSprintFactory : SprintFactory
+    public class ReviewISprintFactory : ISprintFactory
     {
         public Sprint CreateSprint()
         {
