@@ -8,7 +8,7 @@ namespace AvansDevOps.Observer
 {
     public abstract class Publisher
     {
-        public List<ISubsriber> Subscribers { get; set; }
+        public List<ISubsriber> Subscribers { get; set; } = new List<ISubsriber>();
 
         // add subscriber method
         public void Subscribe(ISubsriber subscriber)

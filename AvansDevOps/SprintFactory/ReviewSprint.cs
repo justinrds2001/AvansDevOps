@@ -9,8 +9,6 @@ namespace AvansDevOps.SprintFactory
 {
     public class ReviewSprint : Sprint
     {
-        public ISprintState SprintState { get; set; }
-
         public void CreateSprint()
         {
             SprintState = new CreatedState() {

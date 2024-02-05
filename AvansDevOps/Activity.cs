@@ -10,6 +10,6 @@ namespace AvansDevOps
     public class Activity
     {
         public Developer? Developer { get; set; }
-        public string Task { get; set; }
+        public string Task { get; set; } = string.Empty;
     }
 }

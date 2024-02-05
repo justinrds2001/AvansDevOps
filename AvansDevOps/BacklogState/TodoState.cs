@@ -9,7 +9,7 @@ namespace AvansDevOps.BacklogState
 {
     public class TodoState : IBacklogState
     {
-        public BacklogItem BacklogItem { get; set; }
+        public BacklogItem BacklogItem { get; set; } = null!;
         public void AssignContributor(Contributor contributor)
         {
             BacklogItem.Contributor = contributor;

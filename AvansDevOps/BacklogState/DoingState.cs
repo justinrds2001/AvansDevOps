@@ -9,7 +9,8 @@ namespace AvansDevOps.BacklogState
 {
     public class DoingState : IBacklogState
     {
-        public BacklogItem BacklogItem { get; set; }
+        public BacklogItem BacklogItem { get; set; } = null!;
+
         public void AssignContributor(Contributor contributor)
         {
             throw new NotImplementedException();
@@ -23,11 +24,10 @@ namespace AvansDevOps.BacklogState
                 Console.WriteLine("Notifying testers...");
             }
 
-            if (state != null) BacklogItem.BacklogState = state;
-            else BacklogItem.BacklogState = new TestReadyState
-            {
-                BacklogItem = BacklogItem
-            };
+            if (state != null)
+                BacklogItem.BacklogState = state;
+            else
+                BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
         }
 
         public void FinishTask()

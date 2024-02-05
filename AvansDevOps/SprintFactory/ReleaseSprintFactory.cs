@@ -10,10 +10,7 @@ namespace AvansDevOps.SprintFactory
     {
         public Sprint CreateSprint()
         {
-            return new ReleaseSprint
-            {
-
-            };
+            return new ReleaseSprint { };
         }
     }
 }

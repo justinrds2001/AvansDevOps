@@ -11,7 +11,7 @@ namespace AvansDevOps.Composite
     public abstract class DiscussionThreadComponent: Publisher
     {
         // content string property
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
 
         public abstract void AcceptVisitor(IVisitor visitor);
         public abstract void Replace(DiscussionThreadComponent oldDiscussionThreadComponent, DiscussionThreadComponent newDiscussionThreadComponent);

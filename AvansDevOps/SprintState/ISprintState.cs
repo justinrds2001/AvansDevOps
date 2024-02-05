@@ -8,8 +8,8 @@ namespace AvansDevOps.SprintState
 {
     public interface ISprintState
     {
-        public void ChangeName(string name);
-        public void ChangeStartDate(DateTime startDate);
-        public void ChangeEndDate(DateTime endDate);
+        public void StartSprint();
+        public void FinishSprint();
+        public void ReviewSprint(bool isApproved = false);
     }
 }

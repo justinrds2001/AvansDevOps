@@ -8,5 +8,15 @@ namespace AvansDevOps.Observer
 {
     public class ScrumMaster : Contributor
     {
+        public ScrumMaster(string name, string email)
+        {
+            this.Name = name;
+            this.Email = email;
+        }
+
+        public override void Notify()
+        {
+            Console.WriteLine("Scrum master {0} has been notified.", this.Name);
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace AvansDevOps.BacklogState
 {
     public class TestedState : IBacklogState
     {
-        public BacklogItem BacklogItem { get; set; }
+        public BacklogItem BacklogItem { get; set; } = null!;
         public void AssignContributor(Contributor contributor)
         {
             Console.WriteLine("Cannot switch contributor outside the ToDo");

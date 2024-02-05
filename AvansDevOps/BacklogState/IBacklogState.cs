@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AvansDevOps.BacklogState
 {
     public interface IBacklogState
-    {
+    {   
         public void ChangeState(IBacklogState? state);
         public void AssignContributor(Contributor contributor);
         public void FinishTask();

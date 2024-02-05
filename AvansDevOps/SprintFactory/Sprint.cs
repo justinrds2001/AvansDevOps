@@ -13,5 +13,13 @@ namespace AvansDevOps.SprintFactory
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ISprintState SprintState { get; set; }
+        public void UpdateSprintState(ISprintState sprintState)
+        {
+            SprintState = sprintState;
+        }
+        public void CancelSprint()
+        {
+            SprintState = new CanceledState(this);
+        }
     }
 }
