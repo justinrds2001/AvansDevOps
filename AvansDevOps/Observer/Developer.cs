@@ -14,7 +14,7 @@ namespace AvansDevOps.Observer
             this.Email = email;
         }
 
-        public override void Notify()
+        public void Notify()
         {
             Console.WriteLine($"Developer {this.Name} has been notified of a new sprint.");
         }

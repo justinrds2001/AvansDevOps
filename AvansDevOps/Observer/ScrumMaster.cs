@@ -14,7 +14,7 @@ namespace AvansDevOps.Observer
             this.Email = email;
         }
 
-        public override void Notify()
+        public void Notify()
         {
             Console.WriteLine("Scrum master {0} has been notified.", this.Name);
         }
