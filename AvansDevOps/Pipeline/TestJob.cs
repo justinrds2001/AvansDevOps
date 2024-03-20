@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps
+namespace AvansDevOps.Pipeline
 {
-    public class Pipeline
+    public class TestJob : IJob
     {
     }
 }
