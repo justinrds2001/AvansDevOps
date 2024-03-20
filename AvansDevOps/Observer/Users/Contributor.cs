@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps.Observer
+namespace AvansDevOps.Observer.Users
 {
-    public class Contributor: Participant
+    public abstract class Contributor : Participant
     {
+
     }
 }

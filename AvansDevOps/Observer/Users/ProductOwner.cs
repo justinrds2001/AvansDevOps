@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps.Observer
+namespace AvansDevOps.Observer.Users
 {
-    public class Tester : Contributor
+    public class ProductOwner : Participant
     {
     }
 }

@@ -7,26 +7,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.BacklogState
 {
-    public class TodoState : IBacklogState
+    public class TodoState : BacklogState
     {
-        public BacklogItem BacklogItem { get; set; } = null!;
-        public void AssignContributor(Contributor contributor)
+        public override void ToDoing()
         {
-            BacklogItem.Contributor = contributor;
-        }
-
-        public void ChangeState(IBacklogState? state)
-        {
-            if (state != null) BacklogItem.BacklogState = state;
-            else BacklogItem.BacklogState = new DoingState
-            {
-                BacklogItem = BacklogItem
-            };
-        }
-
-        public void FinishTask()
-        {
-            throw new NotImplementedException();
+            BacklogItem.BacklogState = new DoingState { BacklogItem = BacklogItem };
         }
     }
 }

@@ -7,33 +7,16 @@ using AvansDevOps.ISprintFactory;
 
 namespace AvansDevOps.SprintState
 {
-    public class FinishedState : ISprintState
+    public class FinishedState : SprintState
     {
-        private readonly Sprint _sprint;
-
-        public FinishedState(Sprint Sprint)
+        override public void CloseSprint()
         {
-            this._sprint = Sprint;
+            Sprint.UpdateSprintState(new ClosedState());
         }
 
-        public void FinishSprint()
+        override public void CancelSprint()
         {
-            Console.WriteLine("The sprint is already finished!");
-        }
-
-        public void ReviewSprint(bool isApproved = false)
-        {
-            _sprint.UpdateSprintState(new CanceledState(_sprint));
-
-            if (_sprint is ReleaseSprint releaseSprint && isApproved)
-            {
-                releaseSprint.CreateSprint();
-            }
-        }
-
-        public void StartSprint()
-        {
-            Console.WriteLine("The print is already closed!");
+            Sprint.UpdateSprintState(new CanceledState());
         }
     }
 }

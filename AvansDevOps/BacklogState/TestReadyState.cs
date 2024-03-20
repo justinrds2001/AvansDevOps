@@ -7,27 +7,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.BacklogState
 {
-    public class TestReadyState : IBacklogState
+    public class TestReadyState : BacklogState
     {
-        public BacklogItem BacklogItem { get; set; } = null!;
-
-        public void AssignContributor(Contributor contributor)
+        public override void ToTesting()
         {
-            Console.WriteLine("Cannot switch contributor outside the ToDo");
-        }
-
-        public void ChangeState(IBacklogState? state)
-        {
-            if (state != null) BacklogItem.BacklogState = state;
-            else BacklogItem.BacklogState = new TestingState
-            {
-                BacklogItem = BacklogItem
-            };
-        }
-
-        public void FinishTask()
-        {
-            throw new NotImplementedException();
+            BacklogItem.BacklogState = new TestingState { BacklogItem = BacklogItem };
         }
     }
 }

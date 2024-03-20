@@ -7,26 +7,8 @@ using AvansDevOps.ISprintFactory;
 
 namespace AvansDevOps.SprintState
 {
-    public class CanceledState : ISprintState
+    public class CanceledState : SprintState
     {
-        public CanceledState(Sprint Sprint)
-        {
-            Sprint.CancelSprint();
-        }
-
-        public void FinishSprint()
-        {
-            Console.WriteLine("The sprint is already closed!");
-        }
-
-        public void ReviewSprint(bool isApproved = false)
-        {
-            Console.WriteLine("The sprint is already closed!");
-        }
-
-        public void StartSprint()
-        {
-            Console.WriteLine("The sprint is already closed!");
-        }
+       
     }
 }

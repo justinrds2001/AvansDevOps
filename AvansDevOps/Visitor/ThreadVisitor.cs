@@ -20,7 +20,7 @@ namespace AvansDevOps.Visitor
 
         public void VisitMessage(Message message)
         {
-            Console.WriteLine(message.ToString());
+            Console.WriteLine(message.Content);
         }
     }
 }

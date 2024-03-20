@@ -9,15 +9,10 @@ namespace AvansDevOps.Composite
 {
     public class DiscussionThread : DiscussionThreadComponent
     {
-        public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; }
+        public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; } = new List<DiscussionThreadComponent>();
 
-        public DiscussionThread()
-        {
-            DiscussionThreadComponents = new();
-        }
-        
 
-        public void Add(DiscussionThreadComponent discussionThreadComponent)
+        override public void Add(DiscussionThreadComponent discussionThreadComponent)
         {
             DiscussionThreadComponents.Add(discussionThreadComponent);
         }
@@ -27,10 +22,10 @@ namespace AvansDevOps.Composite
             DiscussionThreadComponents.Remove(discussionThreadComponent);
         }
         
-        override public void Replace(DiscussionThreadComponent oldDiscussionThreadComponent, DiscussionThreadComponent newDiscussionThreadComponent)
+        override public void ReplaceChild(DiscussionThreadComponent oldLeave, DiscussionThreadComponent newNode)
         {
-            Remove(oldDiscussionThreadComponent);
-            Add(newDiscussionThreadComponent);
+            Remove(oldLeave);
+            Add(newNode);
         }
 
 

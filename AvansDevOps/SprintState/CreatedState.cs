@@ -7,7 +7,7 @@ using AvansDevOps.ISprintFactory;
 
 namespace AvansDevOps.SprintState
 {
-    public class CreatedState : ISprintState
+    public class CreatedState : SprintState
     {
         private readonly Sprint _sprint;
 
@@ -26,9 +26,9 @@ namespace AvansDevOps.SprintState
             Console.WriteLine("Sprint has to be started first.");
         }
 
-        public void StartSprint()
+        override public void StartSprint()
         {
-            _sprint.UpdateSprintState(new ActiveState(this._sprint));
+            _sprint.UpdateSprintState(new ActiveState());
         }
     }
 }

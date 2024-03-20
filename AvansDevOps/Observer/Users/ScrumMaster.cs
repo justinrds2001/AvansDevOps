@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvansDevOps.Observer
+namespace AvansDevOps.Observer.Users
 {
-    public interface ISubscriber
+    public class ScrumMaster : Contributor
     {
-        void Update(string message);
+
     }
 }

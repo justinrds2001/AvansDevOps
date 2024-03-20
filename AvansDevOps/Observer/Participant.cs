@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Observer
 {
-    public abstract class Participant : ISubsriber
+    public abstract class Participant : ISubscriber
     {
-        public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
+        public String Name { get; set; }
 
-        void ISubsriber.Notify()
+        public void Update(string message)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{Name} received message: {message}");
         }
     }
 }

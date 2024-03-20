@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AvansDevOps.Observer
 {
-    public class Forum
+    public class Forum : Publisher
     {
         public List<DiscussionThread> Threads { get; set; } = new();
     }

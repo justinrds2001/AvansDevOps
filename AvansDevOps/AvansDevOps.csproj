@@ -8,13 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ISprintFactory\**" />
     <Compile Remove="Program.cs\**" />
+    <EmbeddedResource Remove="ISprintFactory\**" />
     <EmbeddedResource Remove="Program.cs\**" />
+    <None Remove="ISprintFactory\**" />
     <None Remove="Program.cs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ISprintFactory\" />
   </ItemGroup>
 
 </Project>

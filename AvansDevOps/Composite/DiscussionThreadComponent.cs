@@ -14,9 +14,9 @@ namespace AvansDevOps.Composite
         public string Content { get; set; } = string.Empty;
 
         public abstract void AcceptVisitor(IVisitor visitor);
-        public abstract void Replace(DiscussionThreadComponent oldDiscussionThreadComponent, DiscussionThreadComponent newDiscussionThreadComponent);
+        public abstract void ReplaceChild(DiscussionThreadComponent oldLeave, DiscussionThreadComponent newNode);
         public abstract void Remove(DiscussionThreadComponent discussionThreadComponent);
-
+        public abstract void Add(DiscussionThreadComponent discussionThreadComponent);
         public abstract string GetString();
     }
 }

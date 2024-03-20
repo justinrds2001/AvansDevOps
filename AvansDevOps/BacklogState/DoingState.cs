@@ -7,32 +7,14 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.BacklogState
 {
-    public class DoingState : IBacklogState
+    public class DoingState : BacklogState
     {
-        public BacklogItem BacklogItem { get; set; } = null!;
 
-        public void AssignContributor(Contributor contributor)
+        public override void ToTestReady()
         {
-            throw new NotImplementedException();
-        }
-
-        public void ChangeState(IBacklogState? state)
-        {
-            // Notify testers if state is changing from doing to test ready
-            if (state is TestReadyState || state is null)
-            {
-                Console.WriteLine("Notifying testers...");
-            }
-
-            if (state != null)
-                BacklogItem.BacklogState = state;
-            else
-                BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
-        }
-
-        public void FinishTask()
-        {
-            throw new NotImplementedException();
+            // Notify testers
+            Console.WriteLine("Notifying testers...");
+           BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AvansDevOps.SprintState;
+﻿using AvansDevOps.Observer;
+using AvansDevOps.SprintState;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,19 +8,15 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.ISprintFactory
 {
-    public abstract class Sprint
+    public abstract class Sprint : Publisher
     {
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ISprintState SprintState { get; set; }
-        public void UpdateSprintState(ISprintState sprintState)
+        public SprintState.SprintState SprintState { get; set; }
+        public void UpdateSprintState(SprintState.SprintState sprintState)
         {
             SprintState = sprintState;
-        }
-        public void CancelSprint()
-        {
-            SprintState = new CanceledState(this);
         }
     }
 }

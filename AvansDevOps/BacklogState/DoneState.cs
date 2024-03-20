@@ -7,22 +7,8 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.BacklogState
 {
-    public class DoneState : IBacklogState
+    public class DoneState : BacklogState
     {
-        public BacklogItem BacklogItem { get; set; } = null!;
-        public void AssignContributor(Contributor contributor)
-        {
-            Console.WriteLine("Cannot switch contributor outside the ToDo");
-        }
 
-        public void ChangeState(IBacklogState? state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FinishTask()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
