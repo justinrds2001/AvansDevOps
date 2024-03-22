@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.Composite
 {
-    public abstract class DiscussionThreadComponent: Publisher
+    public abstract class DiscussionThreadComponent
     {
-        // content string property
+        public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
+        
 
         public abstract void AcceptVisitor(IVisitor visitor);
         public abstract void ReplaceChild(DiscussionThreadComponent oldLeave, DiscussionThreadComponent newNode);

@@ -11,6 +11,7 @@ namespace AvansDevOps
 {
     public class BacklogItem : Publisher
     {
+        public string Title { get; set; } = string.Empty;
         public Contributor? Contributor { get; set; }
         public string DefinitionOfDone { get; set; } = string.Empty;
         public BacklogState.BacklogState BacklogState { get; set; } = null!;

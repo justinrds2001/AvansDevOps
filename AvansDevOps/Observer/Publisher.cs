@@ -8,7 +8,7 @@ namespace AvansDevOps.Observer
 {
     public abstract class Publisher
     {
-        private List<ISubscriber> _subscribers = new List<ISubscriber>();
+        private readonly List<ISubscriber> _subscribers = new List<ISubscriber>();
 
         // Method to subscribe a participant
         public void Subscribe(ISubscriber subscriber)

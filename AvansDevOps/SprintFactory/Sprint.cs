@@ -10,10 +10,10 @@ namespace AvansDevOps.ISprintFactory
 {
     public abstract class Sprint : Publisher
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public SprintState.SprintState SprintState { get; set; }
+        public SprintState.SprintState SprintState { get; set; } = null!;
         public void UpdateSprintState(SprintState.SprintState sprintState)
         {
             SprintState = sprintState;

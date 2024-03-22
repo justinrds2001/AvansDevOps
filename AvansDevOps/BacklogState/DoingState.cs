@@ -13,7 +13,7 @@ namespace AvansDevOps.BacklogState
         public override void ToTestReady()
         {
             // Notify testers
-            Console.WriteLine("Notifying testers...");
+           BacklogItem.Notify("Backlog item is ready for testing: " + BacklogItem.Title);
            BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
         }
     }

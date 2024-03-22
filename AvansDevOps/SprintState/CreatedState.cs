@@ -9,26 +9,9 @@ namespace AvansDevOps.SprintState
 {
     public class CreatedState : SprintState
     {
-        private readonly Sprint _sprint;
-
-        public CreatedState(Sprint Sprint)
-        {
-            this._sprint = Sprint;
-        }
-
-        public void FinishSprint()
-        {
-            Console.WriteLine("Sprint has to be started first.");
-        }
-
-        public void ReviewSprint(bool isApproved = false)
-        {
-            Console.WriteLine("Sprint has to be started first.");
-        }
-
         override public void StartSprint()
         {
-            _sprint.UpdateSprintState(new ActiveState());
+            Sprint.UpdateSprintState(new ActiveState());
         }
     }
 }

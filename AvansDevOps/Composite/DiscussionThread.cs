@@ -1,4 +1,5 @@
-﻿using AvansDevOps.Visitor;
+﻿using AvansDevOps.Observer;
+using AvansDevOps.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,13 @@ namespace AvansDevOps.Composite
     public class DiscussionThread : DiscussionThreadComponent
     {
         public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; } = new List<DiscussionThreadComponent>();
+        public Forum Forum { get; set; }
 
 
         override public void Add(DiscussionThreadComponent discussionThreadComponent)
         {
+            // Notify forum
+            Forum.Notify("New reply to discussion! " + discussionThreadComponent.Title);
             DiscussionThreadComponents.Add(discussionThreadComponent);
         }
 
@@ -27,7 +31,6 @@ namespace AvansDevOps.Composite
             Remove(oldLeave);
             Add(newNode);
         }
-
 
         override public void AcceptVisitor(IVisitor visitor)
         {

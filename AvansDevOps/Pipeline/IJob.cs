@@ -8,6 +8,6 @@ namespace AvansDevOps.Pipeline
 {
     public interface IJob
     {
-
+        bool Execute();
     }
 }
