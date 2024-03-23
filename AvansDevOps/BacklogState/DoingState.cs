@@ -14,7 +14,7 @@ namespace AvansDevOps.BacklogState
         {
             // Notify testers
            BacklogItem.Notify("Backlog item is ready for testing: " + BacklogItem.Title);
-           BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
+           BacklogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = BacklogItem });
         }
     }
 }

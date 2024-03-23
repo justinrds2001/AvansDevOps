@@ -12,12 +12,12 @@ namespace AvansDevOps.BacklogState
         public override void ToToDo()
         {
             BacklogItem.Notify("Testing failed, moving back to ToDo: " + BacklogItem.Title);
-            BacklogItem.BacklogState = new TodoState { BacklogItem = BacklogItem };
+            BacklogItem.UpdateBacklogItemState(new TodoState() { BacklogItem = BacklogItem });
         }
 
-        public override void ToTesting()
+        public override void ToTested()
         {
-            BacklogItem.BacklogState = new TestingState { BacklogItem = BacklogItem };
+            BacklogItem.UpdateBacklogItemState(new TestedState() { BacklogItem = BacklogItem });
         }
     }
 }

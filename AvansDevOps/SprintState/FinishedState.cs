@@ -11,12 +11,12 @@ namespace AvansDevOps.SprintState
     {
         override public void CloseSprint()
         {
-            Sprint.UpdateSprintState(new ClosedState());
+            Sprint.UpdateSprintState(new ClosedState() { Sprint = Sprint });
         }
 
         override public void CancelSprint()
         {
-            Sprint.UpdateSprintState(new CanceledState());
+            Sprint.UpdateSprintState(new CanceledState() { Sprint = Sprint });
         }
     }
 }

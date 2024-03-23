@@ -11,14 +11,14 @@ namespace AvansDevOps.BacklogState
     {
         public override void ToDone()
         {
-            BacklogItem.BacklogState = new DoneState { BacklogItem = BacklogItem };
+            BacklogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = BacklogItem });
 
         }
         public override void ToTestReady()
         {
             // Notify developers
             Console.WriteLine("Notifying developers...");
-            BacklogItem.BacklogState = new TestReadyState { BacklogItem = BacklogItem };
+            BacklogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = BacklogItem });
         }
     }
 }

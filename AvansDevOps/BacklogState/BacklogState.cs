@@ -12,27 +12,27 @@ namespace AvansDevOps.BacklogState
         public BacklogItem BacklogItem { get; set; } = null!;
         public virtual void ToToDo()
         {
-            throw new InvalidOperationException("You cannot set the backlog to ToDo!");
+            Console.WriteLine("You cannot set the backlog to ToDo!");
         }
         public virtual void ToDoing()
         {
-            throw new InvalidOperationException("You cannot set the backlog to Doing!");
+            Console.WriteLine("You cannot set the backlog to Doing!");
         }
         public virtual void ToTesting()
         {
-            throw new InvalidOperationException("You cannot set the backlog to Testing!");
+            Console.WriteLine("You cannot set the backlog to Testing!");
         }
         public virtual void ToTested()
         {
-            throw new InvalidOperationException("You cannot set the backlog to Tested!");
+            Console.WriteLine("You cannot set the backlog to Tested!");
         }
         public virtual void ToDone()
         {
-            throw new InvalidOperationException("You cannot set the backlog to Done!");
+            Console.WriteLine("You cannot set the backlog to Done!");
         }
         public virtual void ToTestReady()
         {
-            throw new InvalidOperationException("You cannot set the backlog to Test Ready!");
+            Console.WriteLine("You cannot set the backlog to Test Ready!");
         }
     }
 }
