@@ -12,7 +12,6 @@ using AvansDevOps.Pipeline;
 
 static ReleaseSprint MakeReleaseSprint()
 {
-    var factory = new SprintFactory();
     List<Contributor> list = new()
     {
         new Tester() { Name = "Bob" },
@@ -22,12 +21,10 @@ static ReleaseSprint MakeReleaseSprint()
 
     List<Participant> list2 = new()
     {
-        new Tester() { Name = "Bob" },
-        new ScrumMaster() { Name = "Henk-Jan" },
-        new Tester() { Name = "Ruben" },
         new ProductOwner() { Name = "Johannes Vermeer" }
+    };
 
-};
+    list2.AddRange(list);
 
     Backlog backlog = new()
     {
@@ -67,7 +64,7 @@ static ReleaseSprint MakeReleaseSprint()
         Jobs = jobs
     };
 
-    ReleaseSprint releaseSprint = factory.CreateSprint<ReleaseSprint>("Review Sprint", new DateTime(), new DateTime(), pipeline, list2);
+    ReleaseSprint releaseSprint = SprintFactory.CreateSprint<ReleaseSprint>("Review Sprint", new DateTime(2024, 3, 23, 16, 23, 42, DateTimeKind.Utc), new DateTime(2024, 4, 23, 16, 23, 42, DateTimeKind.Utc), pipeline, list2);
     foreach (var item in backlog.BacklogItems)
     {
         releaseSprint.AddBacklogItem(item);
@@ -78,9 +75,9 @@ static ReleaseSprint MakeReleaseSprint()
 
 static void RunCompositeVisitor()
 {
-    ScrumMaster scrummaster = new() { Name = "Henk-Jan" };
-    Developer developer = new() { Name = "Bob" };
-    Tester tester = new() { Name = "Ruben" };
+    ScrumMaster scrummaster = new() { Name = "Ende Rest" };
+    Developer developer = new() { Name = "Bobby" };
+    Tester tester = new() { Name = "Ernst" };
 
     DiscussionThread discussionThread = new DiscussionThread(scrummaster) { 
         Title = "Code comments",
@@ -109,9 +106,9 @@ static void RunObserver()
     Forum forum = new Forum();
 
     // Create some participants
-    Participant participant1 = new Developer() { Name = "Bob" };
-    Participant participant2 = new ScrumMaster() { Name = "Henk-Jan" };
-    Participant participant3 = new Tester() { Name = "Ruben" };
+    Participant participant1 = new Developer() { Name = "Bassie" };
+    Participant participant2 = new ScrumMaster() { Name = "Adriaan" };
+    Participant participant3 = new Tester() { Name = "Enzo" };
 
     // Subscribe participants to the forum
     forum.Subscribe(participant1);
@@ -135,7 +132,7 @@ static void RunBacklogState(){
 
     backlogItem.BacklogState = new TodoState { BacklogItem = backlogItem };
 
-    // Test ToDo to Doing transition
+    // Test To-Do to Doing transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToDoing();
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
@@ -186,14 +183,14 @@ static void RunBacklogState(){
 
     Console.WriteLine();
 
-    // Test Testing to ToDo transition
+    // Test Testing to To-Do transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToToDo();
     Console.WriteLine($"Transitioning from Testing to ToDo: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
-    // Test ToDo to Doing transition again
+    // Test To-Do to Doing transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToDoing();
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
@@ -257,25 +254,27 @@ static void RunReportStrategy()
     };
 
     // Choosing export strategy (PDF or PNG)
-    ExportStrategy pdfStrategy = new PDF();
-    ExportStrategy pngStrategy = new PNG();
+    IExportStrategy pdfStrategy = new Pdf();
+    IExportStrategy pngStrategy = new Png();
 
     // Generating report using selected strategy
     pdfStrategy.GenerateReport(report);
     pngStrategy.GenerateReport(report);
 }
 
+string divider = "\n_________________________________________________________________________________\n";
+
 Console.WriteLine("Observer Pattern\n----------------");
 RunObserver();
-Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine();
 Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
 RunCompositeVisitor();
-Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine(divider);
 Console.WriteLine("Backlog State Pattern\n---------------------");
 RunBacklogState();
-Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine(divider);
 Console.WriteLine("Sprint State Pattern\n--------------------");
 RunSprintState();
-Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine(divider);
 Console.WriteLine("Strategy Pattern\n----------------");
 RunReportStrategy();

@@ -11,7 +11,7 @@ namespace AvansDevOps.SprintFactory
 {
     public class SprintFactory
     {
-        public T CreateSprint<T>(string name, DateTime startDate, DateTime endDate, Pipeline.Pipeline pipeline, List<Participant> participants)
+        public static T CreateSprint<T>(string name, DateTime startDate, DateTime endDate, Pipeline.Pipeline pipeline, List<Participant> participants)
             where T : Sprint, new()
         {
             

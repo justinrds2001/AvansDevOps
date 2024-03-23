@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.ReportStrategy
 {
-    public class PDF : ExportStrategy
+    public class Pdf : IExportStrategy
     {
 
         public void GenerateReport(Report report)

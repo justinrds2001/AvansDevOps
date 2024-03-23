@@ -12,7 +12,7 @@ namespace AvansDevOps.BacklogState
     {
         public override void ToToDo()
         {
-            BacklogItem.Sprint.NotifySpecificParticipant<ScrumMaster>("Testing failed, moving back to ToDo: " + BacklogItem.Title);
+            BacklogItem.Sprint?.NotifySpecificParticipant<ScrumMaster>("Testing failed, moving back to ToDo: " + BacklogItem.Title);
             BacklogItem.UpdateBacklogItemState(new TodoState() { BacklogItem = BacklogItem });
         }
 

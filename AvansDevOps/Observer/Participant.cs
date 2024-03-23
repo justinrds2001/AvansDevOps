@@ -8,7 +8,7 @@ namespace AvansDevOps.Observer
 {
     public abstract class Participant : ISubscriber
     {
-        public String Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public void Update(string message)
         {

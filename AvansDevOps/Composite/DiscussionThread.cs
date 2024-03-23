@@ -27,11 +27,11 @@ namespace AvansDevOps.Composite
 
             DiscussionThreadComponents.Add(discussionThreadComponent);
 
-            topParent.Subscribe(discussionThreadComponent.Commenter);
+            topParent.Subscribe(discussionThreadComponent.Commenter!);
             
         }
 
-        private DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)
+        private static DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)
         {
             if (discussionThread.Parent == null)
             {

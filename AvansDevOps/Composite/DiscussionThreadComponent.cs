@@ -15,7 +15,7 @@ namespace AvansDevOps.Composite
         public DiscussionThreadComponent? Parent { get; set; }
         public Participant? Commenter { get; set; }
 
-        public DiscussionThreadComponent(Participant commenter)
+        protected DiscussionThreadComponent(Participant commenter)
         {
             Commenter = commenter;
             Subscribe(Commenter);

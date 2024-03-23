@@ -9,9 +9,6 @@ namespace AvansDevOps.ISprintFactory
 {
     public class ReviewSprint : Sprint
     {
-        public void CreateSprint()
-        {
-            
-        }
+        
     }
 }

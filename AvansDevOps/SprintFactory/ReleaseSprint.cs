@@ -8,9 +8,6 @@ namespace AvansDevOps.ISprintFactory
 {
     public class ReleaseSprint : Sprint
     {
-        public void CreateSprint()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

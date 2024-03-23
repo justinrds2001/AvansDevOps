@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.ReportStrategy
 {
-    public class PNG : ExportStrategy
+    public class Png : IExportStrategy
     {
         public void GenerateReport(Report report)
         {
