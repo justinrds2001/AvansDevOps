@@ -8,9 +8,14 @@ namespace AvansDevOps.ReportStrategy
 {
     public class PDF : ExportStrategy
     {
-        public void GenerateReport()
+
+        public void GenerateReport(Report report)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Generating PDF report...");
+            Console.WriteLine("Header: " + report.Header);
+            Console.WriteLine("Content: " + report.Content);
+            Console.WriteLine("Footer: " + report.Footer);
+            Console.WriteLine("PDF report generated.");
         }
     }
 }

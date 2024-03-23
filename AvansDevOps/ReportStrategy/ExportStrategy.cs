@@ -8,6 +8,6 @@ namespace AvansDevOps.ReportStrategy
 {
     public interface ExportStrategy
     {
-        void GenerateReport();
+        void GenerateReport(Report report);
     }
 }

@@ -11,7 +11,7 @@ namespace AvansDevOps.Visitor
     {
         public void VisitDiscussionThread(DiscussionThread discussionThread)
         {
-            Console.WriteLine(discussionThread.Content);
+            Console.WriteLine(discussionThread.Commenter?.Name + ": " + discussionThread.Content);
             foreach (var thread in discussionThread.DiscussionThreadComponents)
             {
                 thread.AcceptVisitor(this);
@@ -20,7 +20,7 @@ namespace AvansDevOps.Visitor
 
         public void VisitMessage(Message message)
         {
-            Console.WriteLine(message.Content);
+            Console.WriteLine(message.Commenter?.Name + ": " + message.Content);
         }
     }
 }
