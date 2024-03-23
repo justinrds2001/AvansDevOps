@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Observer;
+using AvansDevOps.Observer.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace AvansDevOps.Pipeline
                 success = job.Execute();
                 if (!success)
                 {
-                    Notify("Pipeline failed");
+                    NotifySpecificParticipant<ScrumMaster>("The pipeline has failed!");
                     break;
                 }
             }

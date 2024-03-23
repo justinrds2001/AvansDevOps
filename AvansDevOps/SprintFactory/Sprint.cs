@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Observer;
+using AvansDevOps.Observer.Users;
 using AvansDevOps.Pipeline;
 using AvansDevOps.SprintState;
 using System;
@@ -28,6 +29,21 @@ namespace AvansDevOps.ISprintFactory
         {
             backlogItem.Sprint = this;
             Backlog.BacklogItems.Add(backlogItem);
+        }
+
+        public void SetPipeline(Pipeline.Pipeline pipeline)
+        {
+            var scrumMaster = Participants.Find(participant => participant.GetType() == typeof(ScrumMaster));
+            if (scrumMaster != null)
+            {
+                pipeline.Subscribe(scrumMaster);
+            }
+            this.pipeline = pipeline;
+        }
+
+        public void ExecutePipeline()
+        {
+            pipeline.Execute();
         }
     }
 }

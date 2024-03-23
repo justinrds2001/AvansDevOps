@@ -10,7 +10,7 @@ using AvansDevOps.SprintFactory;
 using AvansDevOps.ReportStrategy;
 using AvansDevOps.Pipeline;
 
-static ReviewSprint MakeSprint()
+static ReleaseSprint MakeReleaseSprint()
 {
     var factory = new SprintFactory();
     List<Contributor> list = new()
@@ -24,8 +24,10 @@ static ReviewSprint MakeSprint()
     {
         new Tester() { Name = "Bob" },
         new ScrumMaster() { Name = "Henk-Jan" },
-        new Tester() { Name = "Ruben" }
-    };
+        new Tester() { Name = "Ruben" },
+        new ProductOwner() { Name = "Johannes Vermeer" }
+
+};
 
     Backlog backlog = new()
     {
@@ -56,7 +58,8 @@ static ReviewSprint MakeSprint()
     {
         new AnalyseJob(),
         new PackageJob(),
-        new TestJob()
+        new TestJob(),
+        new BuildJob()
     };
 
     Pipeline pipeline = new()
@@ -64,12 +67,13 @@ static ReviewSprint MakeSprint()
         Jobs = jobs
     };
 
-    ReviewSprint reviewSprint = factory.CreateSprint<ReviewSprint>("Review Sprint", new DateTime(), new DateTime(), pipeline, list2);
+    ReleaseSprint releaseSprint = factory.CreateSprint<ReleaseSprint>("Review Sprint", new DateTime(), new DateTime(), pipeline, list2);
     foreach (var item in backlog.BacklogItems)
     {
-        reviewSprint.AddBacklogItem(item);
+        releaseSprint.AddBacklogItem(item);
     }
-    return reviewSprint;
+    releaseSprint.SetPipeline(pipeline);
+    return releaseSprint;
 }
 
 static void RunCompositeVisitor()
@@ -125,7 +129,7 @@ static void RunObserver()
 }
 
 static void RunBacklogState(){
-    ReviewSprint sprint = MakeSprint();
+    ReleaseSprint sprint = MakeReleaseSprint();
     // Creating a new backlog item
     var backlogItem = sprint.Backlog.BacklogItems[0];
 
@@ -204,7 +208,7 @@ static void RunBacklogState(){
 
 static void RunSprintState()
 {
-    var sprint = MakeSprint();
+    var sprint = MakeReleaseSprint();
 
     sprint.UpdateSprintState(new CreatedState() { Sprint = sprint });
 
@@ -268,10 +272,10 @@ static void RunReportStrategy()
 //RunCompositeVisitor();
 //Console.WriteLine("\n_________________________________________________________________________________\n");
 //Console.WriteLine("Backlog State Pattern\n---------------------");
-RunBacklogState();
+//RunBacklogState();
 //Console.WriteLine("\n_________________________________________________________________________________\n");
 //Console.WriteLine("Sprint State Pattern\n--------------------");
-//RunSprintState();
+RunSprintState();
 //Console.WriteLine("\n_________________________________________________________________________________\n");
 //Console.WriteLine("Strategy Pattern\n----------------");
 //RunReportStrategy();
