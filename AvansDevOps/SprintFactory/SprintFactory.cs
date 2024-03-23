@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AvansDevOps.SprintFactory
 {
-    public class SprintFactory
+    public static class SprintFactory
     {
         public static T CreateSprint<T>(string name, DateTime startDate, DateTime endDate, Pipeline.Pipeline pipeline, List<Participant> participants)
             where T : Sprint, new()
