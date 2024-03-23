@@ -11,9 +11,7 @@ namespace AvansDevOps.ISprintFactory
     {
         public void CreateSprint()
         {
-            // SprintState = new CreatedState() {
-
-            // };
+            
         }
     }
 }

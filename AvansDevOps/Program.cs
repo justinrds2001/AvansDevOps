@@ -4,6 +4,9 @@ using AvansDevOps.Observer;
 using AvansDevOps.Visitor;
 using AvansDevOps.BacklogState;
 using AvansDevOps;
+using AvansDevOps.ISprintFactory;
+using AvansDevOps.SprintState;
+using AvansDevOps.SprintFactory;
 
 static void RunCompositeVisitor()
 {
@@ -58,53 +61,76 @@ static void RunBacklogState(){
     var backlogItem = new BacklogItem
     {
         Title = "Implement feature X",
-        BacklogState = new TodoState()
+        Contributor = new Developer(),
+        DefinitionOfDone = "Feature X is implemented",
     };
+
+    backlogItem.BacklogState = new TodoState { BacklogItem = backlogItem };
 
     // Test ToDo to Doing transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToDoing();
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
 
+    Console.WriteLine();
+
     // Test Doing to TestReady transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTestReady();
     Console.WriteLine($"Transitioning from Doing to TestReady: {backlogItem.BacklogState.GetType().Name}");
+
+    Console.WriteLine();
 
     // Test TestReady to Testing transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTesting();
     Console.WriteLine($"Transitioning from TestReady to Testing: {backlogItem.BacklogState.GetType().Name}");
 
+    Console.WriteLine();
+
     // Test Testing to Tested transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTested();
     Console.WriteLine($"Transitioning from Testing to Tested: {backlogItem.BacklogState.GetType().Name}");
+
+    Console.WriteLine();
 
     // Test Tested to Done transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToDone();
     Console.WriteLine($"Transitioning from Tested to Done: {backlogItem.BacklogState.GetType().Name}");
 
+    Console.WriteLine();
+
     // Test Done to TestReady transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTestReady();
     Console.WriteLine($"Transitioning from Done to TestReady: {backlogItem.BacklogState.GetType().Name}");
+
+    Console.WriteLine();
+
+    backlogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = backlogItem });
 
     // Test TestReady to Testing transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTesting();
     Console.WriteLine($"Transitioning from TestReady to Testing: {backlogItem.BacklogState.GetType().Name}");
 
+    Console.WriteLine();
+
     // Test Testing to ToDo transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToToDo();
     Console.WriteLine($"Transitioning from Testing to ToDo: {backlogItem.BacklogState.GetType().Name}");
 
+    Console.WriteLine();
+
     // Test ToDo to Doing transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToDoing();
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
+
+    Console.WriteLine();
 
     // Test Doing to TestReady transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
@@ -114,8 +140,52 @@ static void RunBacklogState(){
     Console.ReadLine();
 }
 
+static void RunSprintState()
+{
+    var factory = new SprintFactory();
+
+    var sprint = factory.CreateReviewSprint();
+
+    sprint.UpdateSprintState(new CreatedState() { Sprint = sprint });
+
+    // Test starting the sprint
+    Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
+    sprint.SprintState.StartSprint();
+    Console.WriteLine($"Transitioning to Active: {sprint.SprintState.GetType().Name}");
+
+    Console.WriteLine();
+
+    // Test finishing the sprint
+    Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
+    sprint.SprintState.FinishSprint();
+    Console.WriteLine($"Transitioning to Finished: {sprint.SprintState.GetType().Name}");
+
+    Console.WriteLine();
+
+    // Test closing the sprint
+    Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
+    sprint.SprintState.CancelSprint();
+    Console.WriteLine($"Transitioning to Canceled: {sprint.SprintState.GetType().Name}");
+
+    sprint.UpdateSprintState(new ActiveState() { Sprint = sprint });
+    Console.WriteLine("\nTransitioning back to active...\n");
+
+    Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
+    sprint.SprintState.FinishSprint();
+    Console.WriteLine($"Transitioning to Finished: {sprint.SprintState.GetType().Name}");
+
+    Console.WriteLine();
+
+    // Test closing the sprint
+    Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
+    sprint.SprintState.CloseSprint();
+    Console.WriteLine($"Transitioning to Closed: {sprint.SprintState.GetType().Name}");
+
+}
+
 
 //RunObserver();
 //RunCompositeVisitor();
-RunBacklogState();
+//RunBacklogState();
+RunSprintState();
 Console.ReadLine();
