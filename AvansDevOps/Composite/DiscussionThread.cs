@@ -10,15 +10,34 @@ namespace AvansDevOps.Composite
 {
     public class DiscussionThread : DiscussionThreadComponent
     {
+        public DiscussionThread(Participant commenter) : base(commenter)
+        {
+        }
+
         public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; } = new();
         public Forum Forum { get; set; } = new();
-
 
         public void Add(DiscussionThreadComponent discussionThreadComponent)
         {
             // Notify forum
-            Forum.Notify("New reply to discussion! " + discussionThreadComponent.Title);
+            discussionThreadComponent.Parent = this;
+
+            DiscussionThreadComponent topParent = SelectTopLevelParent(discussionThreadComponent);
+            topParent.Notify("New reply to discussion! " + discussionThreadComponent.Title);
+
             DiscussionThreadComponents.Add(discussionThreadComponent);
+
+            topParent.Subscribe(discussionThreadComponent.Commenter);
+            
+        }
+
+        private DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)
+        {
+            if (discussionThread.Parent == null)
+            {
+                return discussionThread;
+            }
+            return SelectTopLevelParent(discussionThread.Parent);
         }
 
         public void Remove(DiscussionThreadComponent discussionThreadComponent)

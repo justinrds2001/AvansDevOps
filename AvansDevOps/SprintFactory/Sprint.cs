@@ -15,11 +15,19 @@ namespace AvansDevOps.ISprintFactory
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Backlog Backlog { get; set; } = new();
-        public List<IJob> Jobs { get; set; } = new();
+        public Pipeline.Pipeline pipeline { get; set; } = new();
+        public List<Participant> Participants { get; set; } = new();
+
         public SprintState.SprintState SprintState { get; set; } = null!;
         public void UpdateSprintState(SprintState.SprintState sprintState)
         {
             SprintState = sprintState;
+        }
+
+        public void AddBacklogItem(BacklogItem backlogItem)
+        {
+            backlogItem.Sprint = this;
+            Backlog.BacklogItems.Add(backlogItem);
         }
     }
 }

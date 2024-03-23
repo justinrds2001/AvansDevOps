@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AvansDevOps.Observer.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,10 @@ namespace AvansDevOps.Observer
         // Method to subscribe a participant
         public void Subscribe(ISubscriber subscriber)
         {
-            _subscribers.Add(subscriber);
+            if (!_subscribers.Contains(subscriber))
+            {
+                _subscribers.Add(subscriber);
+            }
         }
 
         // Method to unsubscribe a participant
@@ -28,6 +32,17 @@ namespace AvansDevOps.Observer
             foreach (var subscriber in _subscribers)
             {
                 subscriber.Update(message);
+            }
+        }
+
+        public void NotifySpecificParticipant<T>(string message)
+        {
+            foreach (var subscriber in _subscribers)
+            {
+                if (subscriber.GetType() == typeof(T))
+                {
+                    subscriber.Update(message);
+                }
             }
         }
     }

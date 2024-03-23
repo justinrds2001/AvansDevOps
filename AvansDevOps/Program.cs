@@ -8,6 +8,69 @@ using AvansDevOps.ISprintFactory;
 using AvansDevOps.SprintState;
 using AvansDevOps.SprintFactory;
 using AvansDevOps.ReportStrategy;
+using AvansDevOps.Pipeline;
+
+static ReviewSprint MakeSprint()
+{
+    var factory = new SprintFactory();
+    List<Contributor> list = new()
+    {
+        new Tester() { Name = "Bob" },
+        new ScrumMaster() { Name = "Henk-Jan" },
+        new Tester() { Name = "Ruben" }
+    };
+
+    List<Participant> list2 = new()
+    {
+        new Tester() { Name = "Bob" },
+        new ScrumMaster() { Name = "Henk-Jan" },
+        new Tester() { Name = "Ruben" }
+    };
+
+    Backlog backlog = new()
+    {
+        BacklogItems = new List<BacklogItem>()
+        {
+            new BacklogItem
+            {
+                Title = "Implement feature X",
+                Contributor = list[0],
+                DefinitionOfDone = "Feature X is implemented",
+            },
+            new BacklogItem
+            {
+                Title = "Implement feature Y",
+                Contributor = list[1],
+                DefinitionOfDone = "Feature Y is implemented",
+            },
+            new BacklogItem
+            {
+                Title = "Implement feature Z",
+                Contributor = list[2],
+                DefinitionOfDone = "Feature Z is implemented",
+            }
+        }
+    };
+
+    List<IJob> jobs = new()
+    {
+        new AnalyseJob(),
+        new PackageJob(),
+        new TestJob()
+    };
+
+    Pipeline pipeline = new()
+    {
+        Jobs = jobs
+    };
+
+    ReviewSprint reviewSprint = factory.CreateSprint<ReviewSprint>("Review Sprint", new DateTime(), new DateTime(), pipeline, list2);
+    foreach (var item in backlog.BacklogItems)
+    {
+        reviewSprint.AddBacklogItem(item);
+    }
+    return reviewSprint;
+}
 
 static void RunCompositeVisitor()
 {
@@ -15,16 +78,15 @@ static void RunCompositeVisitor()
     Developer developer = new() { Name = "Bob" };
     Tester tester = new() { Name = "Ruben" };
 
-    DiscussionThread discussionThread = new DiscussionThread() { 
+    DiscussionThread discussionThread = new DiscussionThread(scrummaster) { 
         Title = "Code comments",
         Content = "What is the deal with the unnecessary amount of commented code?",
-        Commenter = scrummaster
     };
 
-    DiscussionThread parentMessage = new() { Content = "That was our intern!", Commenter = developer };
-    Message childMessage = new() { Content = "We... Don't have any interns...", Commenter = scrummaster };
-    DiscussionThread anotherParentMessage = new(){ Content = "I think we should remove the commented code.", Commenter = tester };
-    Message anotherChildMessage = new() { Content = "Bob should do that!", Commenter = scrummaster };
+    DiscussionThread parentMessage = new(developer) { Content = "That was our intern!" };
+    Message childMessage = new(scrummaster) { Content = "We... Don't have any interns..." };
+    DiscussionThread anotherParentMessage = new(tester) { Content = "I think we should remove the commented code." };
+    Message anotherChildMessage = new(scrummaster) { Content = "Bob should do that!" };
 
     discussionThread.Add(parentMessage);
     parentMessage.Add(childMessage);
@@ -63,13 +125,9 @@ static void RunObserver()
 }
 
 static void RunBacklogState(){
+    ReviewSprint sprint = MakeSprint();
     // Creating a new backlog item
-    var backlogItem = new BacklogItem
-    {
-        Title = "Implement feature X",
-        Contributor = new Developer(),
-        DefinitionOfDone = "Feature X is implemented",
-    };
+    var backlogItem = sprint.Backlog.BacklogItems[0];
 
     backlogItem.BacklogState = new TodoState { BacklogItem = backlogItem };
 
@@ -146,9 +204,7 @@ static void RunBacklogState(){
 
 static void RunSprintState()
 {
-    var factory = new SprintFactory();
-
-    var sprint = factory.CreateReviewSprint();
+    var sprint = MakeSprint();
 
     sprint.UpdateSprintState(new CreatedState() { Sprint = sprint });
 
@@ -205,17 +261,17 @@ static void RunReportStrategy()
     pngStrategy.GenerateReport(report);
 }
 
-Console.WriteLine("Observer Pattern\n----------------");
-RunObserver();
-Console.WriteLine("\n_________________________________________________________________________________\n");
-Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
-RunCompositeVisitor();
-Console.WriteLine("\n_________________________________________________________________________________\n");
-Console.WriteLine("Backlog State Pattern\n---------------------");
+//Console.WriteLine("Observer Pattern\n----------------");
+//RunObserver();
+//Console.WriteLine("\n_________________________________________________________________________________\n");
+//Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
+//RunCompositeVisitor();
+//Console.WriteLine("\n_________________________________________________________________________________\n");
+//Console.WriteLine("Backlog State Pattern\n---------------------");
 RunBacklogState();
-Console.WriteLine("\n_________________________________________________________________________________\n");
-Console.WriteLine("Sprint State Pattern\n--------------------");
-RunSprintState();
-Console.WriteLine("\n_________________________________________________________________________________\n");
-Console.WriteLine("Strategy Pattern\n----------------");
-RunReportStrategy();
+//Console.WriteLine("\n_________________________________________________________________________________\n");
+//Console.WriteLine("Sprint State Pattern\n--------------------");
+//RunSprintState();
+//Console.WriteLine("\n_________________________________________________________________________________\n");
+//Console.WriteLine("Strategy Pattern\n----------------");
+//RunReportStrategy();

@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Observer;
+using AvansDevOps.Observer.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace AvansDevOps.BacklogState
     {
         public override void ToToDo()
         {
-            BacklogItem.Notify("Testing failed, moving back to ToDo: " + BacklogItem.Title);
+            BacklogItem.Sprint.NotifySpecificParticipant<ScrumMaster>("Testing failed, moving back to ToDo: " + BacklogItem.Title);
             BacklogItem.UpdateBacklogItemState(new TodoState() { BacklogItem = BacklogItem });
         }
 

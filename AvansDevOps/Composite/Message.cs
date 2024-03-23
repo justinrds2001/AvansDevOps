@@ -1,10 +1,16 @@
 ﻿using AvansDevOps.Composite;
+using AvansDevOps.Observer;
 using AvansDevOps.Visitor;
 
 namespace AvansDevOps.Composite
 {
     public class Message : DiscussionThreadComponent
     {
+        public Message(Participant commenter) : base(commenter)
+        {
+
+        }
+
         public List<DiscussionThreadComponent> ChildComponents { get; set; } = new List<DiscussionThreadComponent>();
 
         public override void AcceptVisitor(IVisitor visitor)

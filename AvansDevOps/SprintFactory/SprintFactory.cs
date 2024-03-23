@@ -1,4 +1,6 @@
 ﻿using AvansDevOps.ISprintFactory;
+using AvansDevOps.Observer;
+using AvansDevOps.Pipeline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,25 @@ namespace AvansDevOps.SprintFactory
 {
     public class SprintFactory
     {
-        public ReleaseSprint CreateReleaseSprint()
+        public T CreateSprint<T>(string name, DateTime startDate, DateTime endDate, Pipeline.Pipeline pipeline, List<Participant> participants)
+            where T : Sprint, new()
         {
-            return new ReleaseSprint();
-        }
+            
+            T sprint = new T()
+            {
+                Name = name,
+                StartDate = startDate,
+                EndDate = endDate,
+                pipeline = pipeline,
+                Participants = participants
+            };
 
-        public ReviewSprint CreateReviewSprint()
-        {
-            return new ReviewSprint();
+            foreach (Participant participant in participants)
+            {
+                sprint.Subscribe(participant);
+            }
+
+            return sprint;
         }
     }
 }
