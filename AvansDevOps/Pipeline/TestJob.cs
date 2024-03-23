@@ -8,5 +8,10 @@ namespace AvansDevOps.Pipeline
 {
     public class TestJob : IJob
     {
+        public bool Execute()
+        {
+            Console.WriteLine("Running Test job...");
+            return true;
+        }
     }
 }

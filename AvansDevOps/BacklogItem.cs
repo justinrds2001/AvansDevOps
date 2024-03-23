@@ -15,5 +15,10 @@ namespace AvansDevOps
         public Contributor? Contributor { get; set; }
         public string DefinitionOfDone { get; set; } = string.Empty;
         public BacklogState.BacklogState BacklogState { get; set; } = null!;
+
+        public void UpdateBacklogItemState(BacklogState.BacklogState backlogState)
+        {
+            BacklogState = backlogState;
+        }
     }
 }
