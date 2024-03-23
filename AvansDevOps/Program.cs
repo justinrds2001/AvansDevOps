@@ -265,17 +265,17 @@ static void RunReportStrategy()
     pngStrategy.GenerateReport(report);
 }
 
-//Console.WriteLine("Observer Pattern\n----------------");
-//RunObserver();
-//Console.WriteLine("\n_________________________________________________________________________________\n");
-//Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
-//RunCompositeVisitor();
-//Console.WriteLine("\n_________________________________________________________________________________\n");
-//Console.WriteLine("Backlog State Pattern\n---------------------");
-//RunBacklogState();
-//Console.WriteLine("\n_________________________________________________________________________________\n");
-//Console.WriteLine("Sprint State Pattern\n--------------------");
+Console.WriteLine("Observer Pattern\n----------------");
+RunObserver();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
+RunCompositeVisitor();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Backlog State Pattern\n---------------------");
+RunBacklogState();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Sprint State Pattern\n--------------------");
 RunSprintState();
-//Console.WriteLine("\n_________________________________________________________________________________\n");
-//Console.WriteLine("Strategy Pattern\n----------------");
-//RunReportStrategy();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Strategy Pattern\n----------------");
+RunReportStrategy();
