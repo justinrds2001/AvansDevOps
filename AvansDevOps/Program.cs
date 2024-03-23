@@ -7,24 +7,30 @@ using AvansDevOps;
 using AvansDevOps.ISprintFactory;
 using AvansDevOps.SprintState;
 using AvansDevOps.SprintFactory;
+using AvansDevOps.ReportStrategy;
 
 static void RunCompositeVisitor()
 {
-    DiscussionThread discussionThread = new DiscussionThread();
+    ScrumMaster scrummaster = new() { Name = "Henk-Jan" };
+    Developer developer = new() { Name = "Bob" };
+    Tester tester = new() { Name = "Ruben" };
 
-    Message parentMessage = new Message { Content = "Parent message content" };
-    Message childMessage = new Message { Content = "Child message content" };
+    DiscussionThread discussionThread = new DiscussionThread() { 
+        Title = "Code comments",
+        Content = "What is the deal with the unnecessary amount of commented code?",
+        Commenter = scrummaster
+    };
 
-    Console.WriteLine(parentMessage.GetType());
+    DiscussionThread parentMessage = new() { Content = "That was our intern!", Commenter = developer };
+    Message childMessage = new() { Content = "We... Don't have any interns...", Commenter = scrummaster };
+    DiscussionThread anotherParentMessage = new(){ Content = "I think we should remove the commented code.", Commenter = tester };
+    Message anotherChildMessage = new() { Content = "Bob should do that!", Commenter = scrummaster };
 
-    // Add child message to parent message
-    parentMessage.Add(childMessage);
-
-    // Since we've added a child message to another message, the parent message should now become a thread
     discussionThread.Add(parentMessage);
-    Console.WriteLine(parentMessage.GetType());
+    parentMessage.Add(childMessage);
+    parentMessage.Add(anotherParentMessage);
+    anotherParentMessage.Add(anotherChildMessage);
 
-    // Visit the discussion thread to print its content
     Console.WriteLine("Discussion Thread Content:");
 
     ThreadVisitor visitor = new ThreadVisitor();
@@ -136,8 +142,6 @@ static void RunBacklogState(){
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
     backlogItem.BacklogState.ToTestReady();
     Console.WriteLine($"Transitioning from Doing to TestReady: {backlogItem.BacklogState.GetType().Name}");
-
-    Console.ReadLine();
 }
 
 static void RunSprintState()
@@ -183,9 +187,35 @@ static void RunSprintState()
 
 }
 
+static void RunReportStrategy()
+{
+    var report = new Report()
+    {
+        Footer = "This is the report footer",
+        Content = "This is the report content",
+        Header = "This is the report header"
+    };
 
-//RunObserver();
-//RunCompositeVisitor();
-//RunBacklogState();
+    // Choosing export strategy (PDF or PNG)
+    ExportStrategy pdfStrategy = new PDF();
+    ExportStrategy pngStrategy = new PNG();
+
+    // Generating report using selected strategy
+    pdfStrategy.GenerateReport(report);
+    pngStrategy.GenerateReport(report);
+}
+
+Console.WriteLine("Observer Pattern\n----------------");
+RunObserver();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Composite and Visitor Patterns\n------------------------------");
+RunCompositeVisitor();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Backlog State Pattern\n---------------------");
+RunBacklogState();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Sprint State Pattern\n--------------------");
 RunSprintState();
-Console.ReadLine();
+Console.WriteLine("\n_________________________________________________________________________________\n");
+Console.WriteLine("Strategy Pattern\n----------------");
+RunReportStrategy();

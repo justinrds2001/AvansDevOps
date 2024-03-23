@@ -12,12 +12,11 @@ namespace AvansDevOps.Composite
     {
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
-        
+        public DiscussionThreadComponent? Parent { get; set; }
+        public Participant? Commenter { get; set; }
+
 
         public abstract void AcceptVisitor(IVisitor visitor);
-        public abstract void ReplaceChild(DiscussionThreadComponent oldLeave, DiscussionThreadComponent newNode);
-        public abstract void Remove(DiscussionThreadComponent discussionThreadComponent);
-        public abstract void Add(DiscussionThreadComponent discussionThreadComponent);
         public abstract string GetString();
     }
 }

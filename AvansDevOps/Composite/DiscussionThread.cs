@@ -10,26 +10,20 @@ namespace AvansDevOps.Composite
 {
     public class DiscussionThread : DiscussionThreadComponent
     {
-        public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; } = new List<DiscussionThreadComponent>();
-        public Forum Forum { get; set; }
+        public List<DiscussionThreadComponent> DiscussionThreadComponents { get; set; } = new();
+        public Forum Forum { get; set; } = new();
 
 
-        override public void Add(DiscussionThreadComponent discussionThreadComponent)
+        public void Add(DiscussionThreadComponent discussionThreadComponent)
         {
             // Notify forum
             Forum.Notify("New reply to discussion! " + discussionThreadComponent.Title);
             DiscussionThreadComponents.Add(discussionThreadComponent);
         }
 
-        override public void Remove(DiscussionThreadComponent discussionThreadComponent)
+        public void Remove(DiscussionThreadComponent discussionThreadComponent)
         {
             DiscussionThreadComponents.Remove(discussionThreadComponent);
-        }
-        
-        override public void ReplaceChild(DiscussionThreadComponent oldLeave, DiscussionThreadComponent newNode)
-        {
-            Remove(oldLeave);
-            Add(newNode);
         }
 
         override public void AcceptVisitor(IVisitor visitor)
