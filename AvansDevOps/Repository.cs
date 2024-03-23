@@ -8,5 +8,6 @@ namespace AvansDevOps
 {
     public class Repository
     {
+        public List<Branch> Branches { get; set; } = new();
     }
 }
