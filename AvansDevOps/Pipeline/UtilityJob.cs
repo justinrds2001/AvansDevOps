@@ -8,10 +8,10 @@ namespace AvansDevOps.Pipeline
 {
     public class UtilityJob : IJob
     {
-        public bool Execute()
+        public bool Execute(bool passed = true)
         {
             Console.WriteLine("Running Utility job...");
-            return true;
+            return passed;
         }
     }
 }

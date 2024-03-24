@@ -8,9 +8,9 @@ namespace AvansDevOps.Pipeline
 {
     public class AnalyseJob : IJob
     {
-        public bool Execute() {
+        public bool Execute(bool passed = true) {
             Console.WriteLine("Running Analyse job...");
-            return true;
+            return passed;
         }
     }
 }

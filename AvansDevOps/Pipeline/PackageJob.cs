@@ -8,10 +8,10 @@ namespace AvansDevOps.Pipeline
 {
     public class PackageJob : IJob
     {
-        public bool Execute()
+        public bool Execute(bool passed = true)
         {
             Console.WriteLine("Running Package job...");
-            return true;
+            return passed;
         }
     }
 }

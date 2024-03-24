@@ -24,9 +24,10 @@ namespace AvansDevOps.SprintFactory
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                Pipeline = pipeline,
                 Participants = participants
             };
+
+            sprint.SetPipeline(pipeline);
 
             foreach (Participant participant in participants)
             {
@@ -34,6 +35,11 @@ namespace AvansDevOps.SprintFactory
             }
 
             return sprint;
+        }
+
+        public static Sprint CreateReleaseSprint(string v, DateTime now1, DateTime now2, List<Participant> participants)
+        {
+            throw new NotImplementedException();
         }
 
         public static ReviewSprint CreateReviewSprint(string name, DateTime startDate, DateTime endDate, List<Participant> participants, Pipeline.Pipeline? pipeline = null)
@@ -44,9 +50,10 @@ namespace AvansDevOps.SprintFactory
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                Pipeline = pipeline,
                 Participants = participants
             };
+
+            if (pipeline != null) sprint.SetPipeline(pipeline);
 
             foreach (Participant participant in participants)
             {
