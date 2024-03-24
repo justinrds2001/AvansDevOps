@@ -80,6 +80,7 @@ namespace AvansTestOpps
 
             discussionThread.Add(reply);
 
+
             // Assert
             Assert.True(developer.MessagesReceived == 1);
 
