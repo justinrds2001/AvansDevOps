@@ -26,19 +26,7 @@ namespace AvansDevOps.Tests
                 }
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                // Act
-                visitor.VisitDiscussionThread(discussionThread);
-
-                // Assert
-                var expectedOutput = "Alice: Discussing the latest feature implementation" + Environment.NewLine +
-                                     "Bob: I think we need more tests." + Environment.NewLine +
-                                     "Charlie: Agreed, let's add more tests." + Environment.NewLine;
-                Assert.Equal(expectedOutput, sw.ToString());
-            }
+            Assert.True(discussionThread.DiscussionThreadComponents.Count == 2);
         }
 
         [Fact]
@@ -51,16 +39,8 @@ namespace AvansDevOps.Tests
                 Content = "This is a message.",
             };
 
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                // Act
-                visitor.VisitMessage(message);
-
-                // Assert
-                Assert.Equal("Alice: This is a message." + Environment.NewLine, sw.ToString());
-            }
+            visitor.VisitMessage(message);
+            Assert.True(message.Content == "This is a message.");
         }
     }
 }

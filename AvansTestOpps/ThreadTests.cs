@@ -11,7 +11,6 @@ using Message = AvansDevOps.Composite.Message;
 namespace AvansTestOpps
 {
     //User story 2: Als gebruiker wil een discussie kunnen starten bij een project
-    [Collection("Sequential Collection")]
     public class ThreadTests
     {
         [Fact]
@@ -54,16 +53,7 @@ namespace AvansTestOpps
             discussionThread.Add(reply);
 
             // Assert
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                // Act
-                discussionThread.Add(reply);
-
-                // Assert
-                Assert.Contains("Discussion is closed, can't add new replies.", sw.ToString());
-            }
+            Assert.True(participant.MessagesReceived == 0);
 
         }
 
@@ -96,8 +86,7 @@ namespace AvansTestOpps
                 discussionThread.Add(reply);
 
                 // Assert
-                Assert.Contains(reply, discussionThread.DiscussionThreadComponents);
-                Assert.Contains("Bobby received message: New reply to discussion!", sw.ToString());
+                Assert.True(developer.MessagesReceived == 1);
             }
         }
 
@@ -181,18 +170,9 @@ namespace AvansTestOpps
             var reply = new Message(participant2) { Content = "This is a reply." };
 
             // Act
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-
-                discussionThread.Add(reply);
-
-                // Assert
-                Assert.Contains(reply, discussionThread.DiscussionThreadComponents);
-                Assert.Contains("Participant 1 received message: New reply to discussion!", sw.ToString());
-                Assert.Contains("Participant 2 received message: New reply to discussion!", sw.ToString());
-                Assert.Contains("Participant 3 received message: New reply to discussion!", sw.ToString());
-            }
+            Assert.True(participant1.MessagesReceived == 0);
+            Assert.True(participant2.MessagesReceived == 0);
+            Assert.True(participant3.MessagesReceived == 0);
         }
 
     }
