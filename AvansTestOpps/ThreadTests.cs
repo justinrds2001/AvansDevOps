@@ -78,16 +78,11 @@ namespace AvansTestOpps
             DiscussionThread reply = new DiscussionThread(developer) { Content = "That was our intern!" };
             discussionThread.AssociatedBacklogItem = backlogItem;
 
-            // Act
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
+            discussionThread.Add(reply);
 
-                discussionThread.Add(reply);
+            // Assert
+            Assert.True(developer.MessagesReceived == 1);
 
-                // Assert
-                Assert.True(developer.MessagesReceived == 1);
-            }
         }
 
         [Fact]
