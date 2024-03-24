@@ -18,12 +18,12 @@ namespace AvansDevOps.Pipeline
             Jobs.Add(job);
         }
 
-        public bool Execute()
+        public bool Execute(bool passed = true)
         {
             bool success = true;
             foreach (IJob job in Jobs)
             {
-                success = job.Execute();
+                success = job.Execute(passed);
                 if (!success)
                 {
                     NotifySpecificParticipant<ScrumMaster>("The pipeline has failed!");

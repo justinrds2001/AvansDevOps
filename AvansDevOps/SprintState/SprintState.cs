@@ -9,24 +9,22 @@ namespace AvansDevOps.SprintState
 {
     public abstract class SprintState
     {
-        public Sprint Sprint { get; set; } = null!;
-
-        virtual public void StartSprint()
+        virtual public void StartSprint(Sprint sprint)
         {
             Console.WriteLine("You cannot start the sprint!");
         }
 
-        virtual public void CancelSprint()
+        virtual public void CancelSprint(Sprint sprint)
         {
             Console.WriteLine("You cannot cancel the sprint!");
         }
 
-        virtual public void FinishSprint()
+        virtual public void FinishSprint(Sprint sprint)
         {
             Console.WriteLine("You cannot finish the sprint!");
         }
 
-        virtual public void CloseSprint()
+        virtual public void CloseSprint(Sprint sprint)
         {
             Console.WriteLine("You cannot close the sprint!");
         }   

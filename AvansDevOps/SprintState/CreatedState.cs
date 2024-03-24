@@ -9,10 +9,10 @@ namespace AvansDevOps.SprintState
 {
     public class CreatedState : SprintState
     {
-        override public void StartSprint()
+        override public void StartSprint(Sprint sprint)
         {
-            Sprint.allowChanges = false;
-            Sprint.UpdateSprintState(new ActiveState() { Sprint = Sprint });
+            sprint.allowChanges = false;
+            sprint.UpdateSprintState(new ActiveState());
         }
     }
 }

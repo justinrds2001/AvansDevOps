@@ -121,10 +121,9 @@ namespace AvansDevOps.ISprintFactory
             else
             {
                 var scrumMaster = Participants.Find(participant => participant.GetType() == typeof(ScrumMaster));
-                if (scrumMaster != null)
-                {
-                    pipeline.Subscribe(scrumMaster);
-                }
+                var productOwner = Participants.Find(participant => participant.GetType() == typeof(ProductOwner));
+                if (scrumMaster != null) pipeline.Subscribe(scrumMaster);
+                if (productOwner != null) pipeline.Subscribe(productOwner);
                 this.Pipeline = pipeline;
             }
         }
