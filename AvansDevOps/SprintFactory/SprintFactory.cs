@@ -14,7 +14,7 @@ namespace AvansDevOps.SprintFactory
         public static ReleaseSprint? CreateReleaseSprint(string name, DateTime startDate, DateTime endDate, List<Participant> participants, Pipeline.Pipeline pipeline)
         {
 
-            if (pipeline.Jobs.Last().GetType() != typeof(DeployJob))
+            if (pipeline.Jobs[pipeline.Jobs.Count - 1].GetType() != typeof(DeployJob))
             {
                 Console.WriteLine("Last job in pipeline should be a DeployJob");
                 return null;

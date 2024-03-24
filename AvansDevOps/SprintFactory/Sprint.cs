@@ -15,7 +15,8 @@ namespace AvansDevOps.ISprintFactory
         private Backlog backlog = new Backlog();
         private Pipeline.Pipeline? pipeline;
         private List<Participant> participants = new List<Participant>();
-        public bool allowChanges = true;
+        private bool allowChanges = true;
+        private string errorMessage = "Changes are not allowed.";
 
         public string Name
         {
@@ -23,7 +24,7 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
                     name = value;
             }
@@ -35,9 +36,9 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
-                startDate = value;
+                    startDate = value;
             }
         }
 
@@ -47,7 +48,7 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
                     endDate = value;
             }
@@ -59,7 +60,7 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
                     backlog = value;
             }
@@ -71,7 +72,7 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
                     pipeline = value;
             }
@@ -83,7 +84,7 @@ namespace AvansDevOps.ISprintFactory
             set
             {
                 if (!allowChanges)
-                    Console.WriteLine("Changes are not allowed.");
+                    Console.WriteLine(errorMessage);
                 else
                     participants = value;
             }
@@ -105,7 +106,7 @@ namespace AvansDevOps.ISprintFactory
         public void AddBacklogItem(BacklogItem backlogItem)
         {
             if (!allowChanges)
-                Console.WriteLine("Changes are not allowed.");
+                Console.WriteLine(errorMessage);
             else
             {
                 backlogItem.Sprint = this;
@@ -117,7 +118,7 @@ namespace AvansDevOps.ISprintFactory
         public void SetPipeline(Pipeline.Pipeline pipeline)
         {
             if (!allowChanges)
-                Console.WriteLine("Changes are not allowed.");
+                Console.WriteLine(errorMessage);
             else
             {
                 var scrumMaster = Participants.Find(participant => participant.GetType() == typeof(ScrumMaster));

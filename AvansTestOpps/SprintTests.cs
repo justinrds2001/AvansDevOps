@@ -282,7 +282,7 @@ namespace AvansDevOps.Tests
             sprint.SprintState.CloseSprint(sprint);
 
             // Assert
-            Assert.True(sprint.Pipeline.Jobs.Count > 0);
+            Assert.True(sprint.Pipeline!.Jobs.Count > 0);
         }
 
         [Fact]

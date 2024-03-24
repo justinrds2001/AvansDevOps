@@ -11,7 +11,7 @@ namespace AvansDevOps.SprintState
     {
         override public void StartSprint(Sprint sprint)
         {
-            sprint.allowChanges = false;
+            sprint.AllowChanges = false;
             sprint.UpdateSprintState(new ActiveState());
         }
     }
