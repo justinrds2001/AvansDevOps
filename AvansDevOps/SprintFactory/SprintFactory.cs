@@ -53,7 +53,10 @@ namespace AvansDevOps.SprintFactory
                 Participants = participants
             };
 
-            if (pipeline != null) sprint.SetPipeline(pipeline);
+            if (pipeline != null)
+            {
+                sprint.SetPipeline(pipeline);
+            }
 
             foreach (Participant participant in participants)
             {
