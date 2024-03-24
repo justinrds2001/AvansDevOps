@@ -1,6 +1,7 @@
 ﻿using AvansDevOps.Composite;
 using AvansDevOps.Observer.Users;
 using AvansDevOps.Visitor;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,6 +28,27 @@ namespace AvansDevOps.Tests
             };
 
             Assert.True(discussionThread.DiscussionThreadComponents.Count == 2);
+        }
+
+        [Fact]
+        public void VisitDiscussionThread_Visits_Child_Components()
+        {
+            // Arrange
+            var visitor = new ThreadVisitor();
+            var discussionThread = new DiscussionThread(new Developer { Name = "User" })
+            {
+                Content = "Discussion thread content"
+            };
+            var childComponent1 = new Message(new Developer { Name = "User1" }) { Content = "Message 1" };
+            var childComponent2 = new Message(new Developer { Name = "User2" }) { Content = "Message 2" };
+            discussionThread.DiscussionThreadComponents.Add(childComponent1);
+            discussionThread.DiscussionThreadComponents.Add(childComponent2);
+
+            // Act
+            visitor.VisitDiscussionThread(discussionThread);
+
+            // Assert
+            Assert.True(discussionThread.Commenter?.MessagesReceived == 0);
         }
 
         [Fact]
