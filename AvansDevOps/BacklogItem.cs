@@ -15,9 +15,8 @@ namespace AvansDevOps
         public string Title { get; set; } = string.Empty;
         public Contributor? Contributor { get; set; }
         public string DefinitionOfDone { get; set; } = string.Empty;
-        public BacklogState.BacklogState BacklogState { get; set; } = null!;
+        public BacklogState.BacklogState BacklogState { get; set; } = new TodoState();
         public Sprint? Sprint { get; set; }
-
         public void UpdateBacklogItemState(BacklogState.BacklogState backlogState)
         {
             BacklogState = backlogState;

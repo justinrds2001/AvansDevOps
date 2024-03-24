@@ -9,28 +9,27 @@ namespace AvansDevOps.BacklogState
 {
     public abstract class BacklogState
     {   
-        public BacklogItem BacklogItem { get; set; } = null!;
-        public virtual void ToToDo()
+        public virtual void ToToDo(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to ToDo!");
         }
-        public virtual void ToDoing()
+        public virtual void ToDoing(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to Doing!");
         }
-        public virtual void ToTesting()
+        public virtual void ToTesting(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to Testing!");
         }
-        public virtual void ToTested()
+        public virtual void ToTested(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to Tested!");
         }
-        public virtual void ToDone()
+        public virtual void ToDone(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to Done!");
         }
-        public virtual void ToTestReady()
+        public virtual void ToTestReady(BacklogItem item)
         {
             Console.WriteLine("You cannot set the backlog to Test Ready!");
         }

@@ -44,7 +44,7 @@ namespace AvansTestOpps
             // Arrange
             var participant = new Developer();
             var backlogItem = new BacklogItem();
-            backlogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = backlogItem });
+            backlogItem.UpdateBacklogItemState(new DoneState());
             var discussionThread = new DiscussionThread(participant);
             discussionThread.AssociatedBacklogItem = backlogItem;
             var reply = new Message(participant);
@@ -78,16 +78,11 @@ namespace AvansTestOpps
             DiscussionThread reply = new DiscussionThread(developer) { Content = "That was our intern!" };
             discussionThread.AssociatedBacklogItem = backlogItem;
 
-            // Act
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
+            discussionThread.Add(reply);
 
-                discussionThread.Add(reply);
+            // Assert
+            Assert.True(developer.MessagesReceived == 1);
 
-                // Assert
-                Assert.True(developer.MessagesReceived == 1);
-            }
         }
 
         [Fact]
