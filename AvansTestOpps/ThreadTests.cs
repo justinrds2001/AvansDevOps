@@ -44,7 +44,7 @@ namespace AvansTestOpps
             // Arrange
             var participant = new Developer();
             var backlogItem = new BacklogItem();
-            backlogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = backlogItem });
+            backlogItem.UpdateBacklogItemState(new DoneState());
             var discussionThread = new DiscussionThread(participant);
             discussionThread.AssociatedBacklogItem = backlogItem;
             var reply = new Message(participant);
@@ -80,9 +80,10 @@ namespace AvansTestOpps
 
             discussionThread.Add(reply);
 
+
             // Assert
             Assert.True(developer.MessagesReceived == 1);
-          
+
         }
 
         [Fact]

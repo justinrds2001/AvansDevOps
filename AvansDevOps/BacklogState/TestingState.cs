@@ -10,15 +10,15 @@ namespace AvansDevOps.BacklogState
 {
     public class TestingState : BacklogState
     {
-        public override void ToToDo()
+        public override void ToToDo(BacklogItem item)
         {
-            BacklogItem.Sprint?.NotifySpecificParticipant<ScrumMaster>("Testing failed, moving back to ToDo: " + BacklogItem.Title);
-            BacklogItem.UpdateBacklogItemState(new TodoState() { BacklogItem = BacklogItem });
+            item.Sprint?.NotifySpecificParticipant<ScrumMaster>("Testing failed, moving back to ToDo: " + item.Title);
+            item.UpdateBacklogItemState(new TodoState());
         }
 
-        public override void ToTested()
+        public override void ToTested(BacklogItem item)
         {
-            BacklogItem.UpdateBacklogItemState(new TestedState() { BacklogItem = BacklogItem });
+            item.UpdateBacklogItemState(new TestedState());
         }
     }
 }

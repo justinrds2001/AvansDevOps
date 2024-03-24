@@ -9,9 +9,9 @@ namespace AvansDevOps.BacklogState
 {
     public class TestReadyState : BacklogState
     {
-        public override void ToTesting()
+        public override void ToTesting(BacklogItem item)
         {
-            BacklogItem.UpdateBacklogItemState(new TestingState() { BacklogItem = BacklogItem });
+            item.UpdateBacklogItemState(new TestingState());
         }
     }
 }

@@ -11,13 +11,10 @@ namespace AvansDevOps.BacklogState
     public class DoingState : BacklogState
     {
 
-        public override void ToTestReady()
+        public override void ToTestReady(BacklogItem item)
         {
-            if(BacklogItem.Sprint != null)
-            {
-                BacklogItem.Sprint.NotifySpecificParticipant<Tester>("Backlog item is ready for testing: " + BacklogItem.Title);
-                BacklogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = BacklogItem });
-            }
+            item.Sprint?.NotifySpecificParticipant<Tester>("Backlog item is ready for testing: " + item.Title);
+            item.UpdateBacklogItemState(new TestReadyState());
         }
     }
 }
