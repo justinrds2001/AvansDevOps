@@ -38,7 +38,7 @@ namespace AvansDevOps.Composite
 
         }
 
-        private static DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)
+        public static DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)
         {
             if (discussionThread.Parent == null)
             {
