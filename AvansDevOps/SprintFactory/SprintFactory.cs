@@ -24,9 +24,10 @@ namespace AvansDevOps.SprintFactory
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                Pipeline = pipeline,
                 Participants = participants
             };
+
+            sprint.SetPipeline(pipeline);
 
             foreach (Participant participant in participants)
             {
@@ -44,9 +45,13 @@ namespace AvansDevOps.SprintFactory
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                Pipeline = pipeline,
                 Participants = participants
             };
+
+            if (pipeline != null)
+            {
+                sprint.SetPipeline(pipeline);
+            }
 
             foreach (Participant participant in participants)
             {

@@ -9,9 +9,9 @@ namespace AvansDevOps.SprintState
 {
     public class ActiveState : SprintState
     {
-        override public void FinishSprint()
+        override public void FinishSprint(Sprint sprint)
         {
-            Sprint.UpdateSprintState(new FinishedState() { Sprint = Sprint });
+            sprint.UpdateSprintState(new FinishedState());
         }
     }
 }

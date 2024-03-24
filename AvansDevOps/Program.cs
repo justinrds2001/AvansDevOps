@@ -215,11 +215,11 @@ static void RunSprintState()
 {
     var sprint = MakeReleaseSprint();
 
-    sprint.UpdateSprintState(new CreatedState() { Sprint = sprint });
+    sprint.UpdateSprintState(new CreatedState());
 
     // Test starting the sprint
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
-    sprint.SprintState.StartSprint();
+    sprint.SprintState.StartSprint(sprint);
     Console.WriteLine($"Transitioning to Active: {sprint.SprintState.GetType().Name}");
 
     Console.WriteLine();
@@ -228,28 +228,28 @@ static void RunSprintState()
 
     // Test finishing the sprint
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
-    sprint.SprintState.FinishSprint();
+    sprint.SprintState.FinishSprint(sprint);
     Console.WriteLine($"Transitioning to Finished: {sprint.SprintState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test closing the sprint
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
-    sprint.SprintState.CancelSprint();
+    sprint.SprintState.CancelSprint(sprint);
     Console.WriteLine($"Transitioning to Canceled: {sprint.SprintState.GetType().Name}");
 
-    sprint.UpdateSprintState(new ActiveState() { Sprint = sprint });
+    sprint.UpdateSprintState(new ActiveState());
     Console.WriteLine("\nTransitioning back to active...\n");
 
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
-    sprint.SprintState.FinishSprint();
+    sprint.SprintState.FinishSprint(sprint);
     Console.WriteLine($"Transitioning to Finished: {sprint.SprintState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test closing the sprint
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
-    sprint.SprintState.CloseSprint();
+    sprint.SprintState.CloseSprint(sprint);
     Console.WriteLine($"Transitioning to Closed: {sprint.SprintState.GetType().Name}");
 
 }

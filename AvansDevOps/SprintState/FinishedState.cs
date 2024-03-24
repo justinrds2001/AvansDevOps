@@ -10,22 +10,22 @@ namespace AvansDevOps.SprintState
 {
     public class FinishedState : SprintState
     {
-        override public void CloseSprint()
+        override public void CloseSprint(Sprint sprint)
         {
-            if (Sprint is ReleaseSprint)
+            if (sprint is ReleaseSprint)
             {
-                Sprint.NotifySpecificParticipant<ScrumMaster>("New release has been sucessful.");
-                Sprint.NotifySpecificParticipant<ProductOwner>("New release has been sucessful.");
-                Sprint.ExecutePipeline();
+                sprint.NotifySpecificParticipant<ScrumMaster>("New release has been sucessful.");
+                sprint.NotifySpecificParticipant<ProductOwner>("New release has been sucessful.");
+                sprint.ExecutePipeline();
             }
 
-            Sprint.UpdateSprintState(new ClosedState() { Sprint = Sprint });
+            sprint.UpdateSprintState(new ClosedState());
         }
 
-        override public void CancelSprint()
+        override public void CancelSprint(Sprint sprint)
         {
 
-            Sprint.UpdateSprintState(new CanceledState() { Sprint = Sprint });
+            sprint.UpdateSprintState(new CanceledState());
         }
     }
 }
