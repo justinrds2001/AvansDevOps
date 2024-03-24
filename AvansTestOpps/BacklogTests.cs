@@ -72,6 +72,7 @@ namespace AvansTestOpps
             Sprint sprint = SprintFactory.CreateReviewSprint("Test", DateTime.Now, DateTime.Now, participants);
             sprint.AddBacklogItem(item);
 
+            // Act
             item.BacklogState.ToDoing(item);
             item.BacklogState.ToTestReady(item);
 
@@ -97,6 +98,7 @@ namespace AvansTestOpps
             Sprint sprint = SprintFactory.CreateReviewSprint("Test", DateTime.Now, DateTime.Now, participants);
             sprint.AddBacklogItem(item);
 
+            // Act
             item.BacklogState.ToDoing(item);
             item.BacklogState.ToTestReady(item);
             item.BacklogState.ToTesting(item);

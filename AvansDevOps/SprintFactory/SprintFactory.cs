@@ -37,6 +37,11 @@ namespace AvansDevOps.SprintFactory
             return sprint;
         }
 
+        public static Sprint CreateReleaseSprint(string v, DateTime now1, DateTime now2, List<Participant> participants)
+        {
+            throw new NotImplementedException();
+        }
+
         public static ReviewSprint CreateReviewSprint(string name, DateTime startDate, DateTime endDate, List<Participant> participants, Pipeline.Pipeline? pipeline = null)
         {
 
