@@ -37,6 +37,9 @@ namespace AvansTestOpps
             item.BacklogState.ToTestReady(item);
             item.BacklogState.ToTesting(item);
             item.BacklogState.ToTested(item);
+            item.BacklogState.ToTestReady(item);
+            item.BacklogState.ToTesting(item);
+            item.BacklogState.ToTested(item);
             item.BacklogState.ToDone(item);
 
             // Act
@@ -44,12 +47,16 @@ namespace AvansTestOpps
         }
 
         [Fact]
-        public void ItemShouldNotBeAbleToSkipStates()
+        public void ItemShouldNotBeAbleToGoToInvalidStates()
         {
             // Arrange
             BacklogItem item = new();
 
             // Act
+            item.BacklogState.ToToDo(item);
+            item.BacklogState.ToTestReady(item);
+            item.BacklogState.ToTesting(item);
+            item.BacklogState.ToTested(item);
             item.BacklogState.ToDone(item);
 
             // Assert
