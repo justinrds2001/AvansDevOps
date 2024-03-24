@@ -24,6 +24,7 @@ namespace AvansDevOps.SprintState
 
         override public void CancelSprint()
         {
+
             Sprint.UpdateSprintState(new CanceledState() { Sprint = Sprint });
         }
     }

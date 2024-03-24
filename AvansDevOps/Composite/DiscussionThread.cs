@@ -19,8 +19,15 @@ namespace AvansDevOps.Composite
 
         public void Add(DiscussionThreadComponent discussionThreadComponent)
         {
+            if (IsDiscussionClosed())
+            {
+                Console.WriteLine("Discussion is closed, can't add new replies.");
+                return;
+            }
             // Notify forum
             discussionThreadComponent.Parent = this;
+
+            discussionThreadComponent.AssociatedBacklogItem = AssociatedBacklogItem;
 
             DiscussionThreadComponent topParent = SelectTopLevelParent(discussionThreadComponent);
             topParent.Notify("New reply to discussion! " + discussionThreadComponent.Title);
@@ -28,7 +35,7 @@ namespace AvansDevOps.Composite
             DiscussionThreadComponents.Add(discussionThreadComponent);
 
             topParent.Subscribe(discussionThreadComponent.Commenter!);
-            
+
         }
 
         private static DiscussionThreadComponent SelectTopLevelParent(DiscussionThreadComponent discussionThread)

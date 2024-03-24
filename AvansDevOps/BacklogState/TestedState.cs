@@ -12,7 +12,6 @@ namespace AvansDevOps.BacklogState
         public override void ToDone()
         {
             BacklogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = BacklogItem });
-
         }
         public override void ToTestReady()
         {

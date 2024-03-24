@@ -4,22 +4,99 @@ using AvansDevOps.Pipeline;
 using AvansDevOps.SprintState;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AvansDevOps.ISprintFactory
 {
     public abstract class Sprint : Publisher
     {
-        public string Name { get; set; } = string.Empty;
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public Backlog Backlog { get; set; } = new();
-        public Pipeline.Pipeline pipeline { get; set; } = new();
-        public List<Participant> Participants { get; set; } = new();
+        private string name = string.Empty;
+        private DateTime startDate;
+        private DateTime endDate;
+        private Backlog backlog = new Backlog();
+        private Pipeline.Pipeline? pipeline;
+        private List<Participant> participants = new List<Participant>();
+        public bool allowChanges = true;
 
-        public SprintState.SprintState SprintState { get; set; } = null!;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                    name = value;
+            }
+        }
+
+        public DateTime StartDate
+        {
+            get => startDate;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                startDate = value;
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get => endDate;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                    endDate = value;
+            }
+        }
+
+        public Backlog Backlog
+        {
+            get => backlog;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                    backlog = value;
+            }
+        }
+
+        public Pipeline.Pipeline? Pipeline
+        {
+            get => pipeline;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                    pipeline = value;
+            }
+        }
+
+        public List<Participant> Participants
+        {
+            get => participants;
+            set
+            {
+                if (!allowChanges)
+                    Console.WriteLine("Changes are not allowed.");
+                else
+                    participants = value;
+            }
+        }
+
+        public bool AllowChanges
+        {
+            get => allowChanges;
+            set => allowChanges = value;
+        }
+
+        public SprintState.SprintState SprintState { get; set; } = new CreatedState();
+
         public void UpdateSprintState(SprintState.SprintState sprintState)
         {
             SprintState = sprintState;
@@ -27,23 +104,39 @@ namespace AvansDevOps.ISprintFactory
 
         public void AddBacklogItem(BacklogItem backlogItem)
         {
-            backlogItem.Sprint = this;
-            Backlog.BacklogItems.Add(backlogItem);
+            if (!allowChanges)
+                Console.WriteLine("Changes are not allowed.");
+            else
+            {
+                backlogItem.Sprint = this;
+                Backlog.BacklogItems.Add(backlogItem);
+            }
+
         }
 
         public void SetPipeline(Pipeline.Pipeline pipeline)
         {
-            var scrumMaster = Participants.Find(participant => participant.GetType() == typeof(ScrumMaster));
-            if (scrumMaster != null)
+            if (!allowChanges)
+                Console.WriteLine("Changes are not allowed.");
+            else
             {
-                pipeline.Subscribe(scrumMaster);
+                var scrumMaster = Participants.Find(participant => participant.GetType() == typeof(ScrumMaster));
+                if (scrumMaster != null)
+                {
+                    pipeline.Subscribe(scrumMaster);
+                }
+                this.Pipeline = pipeline;
             }
-            this.pipeline = pipeline;
         }
 
         public void ExecutePipeline()
         {
-            pipeline.Execute();
+            if (Pipeline == null)
+            {
+                Console.WriteLine("No pipeline set");
+                return;
+            }
+            Pipeline.Execute();
         }
     }
 }

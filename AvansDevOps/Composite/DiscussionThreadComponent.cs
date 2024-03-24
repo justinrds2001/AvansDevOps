@@ -1,4 +1,5 @@
-﻿using AvansDevOps.Observer;
+﻿using AvansDevOps.BacklogState;
+using AvansDevOps.Observer;
 using AvansDevOps.Visitor;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,17 @@ namespace AvansDevOps.Composite
         public string Content { get; set; } = string.Empty;
         public DiscussionThreadComponent? Parent { get; set; }
         public Participant? Commenter { get; set; }
+        public BacklogItem AssociatedBacklogItem { get; set; } = null!;
 
         protected DiscussionThreadComponent(Participant commenter)
         {
             Commenter = commenter;
             Subscribe(Commenter);
+        }
+
+        public bool IsDiscussionClosed()
+        {
+            return AssociatedBacklogItem.BacklogState.GetType() == typeof(DoneState);
         }
 
         public abstract void AcceptVisitor(IVisitor visitor);

@@ -27,6 +27,7 @@ namespace AvansDevOps.Pipeline
                 if (!success)
                 {
                     NotifySpecificParticipant<ScrumMaster>("The pipeline has failed!");
+                    NotifySpecificParticipant<ProductOwner>("The pipeline has failed!");
                     break;
                 }
             }

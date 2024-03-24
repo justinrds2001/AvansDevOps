@@ -11,16 +11,40 @@ namespace AvansDevOps.SprintFactory
 {
     public static class SprintFactory
     {
-        public static T CreateSprint<T>(string name, DateTime startDate, DateTime endDate, Pipeline.Pipeline pipeline, List<Participant> participants)
-            where T : Sprint, new()
+        public static ReleaseSprint? CreateReleaseSprint(string name, DateTime startDate, DateTime endDate, List<Participant> participants, Pipeline.Pipeline pipeline)
         {
-            
-            T sprint = new T()
+
+            if (pipeline.Jobs.Last().GetType() != typeof(DeployJob))
+            {
+                Console.WriteLine("Last job in pipeline should be a DeployJob");
+                return null;
+            }            
+            ReleaseSprint sprint = new()
             {
                 Name = name,
                 StartDate = startDate,
                 EndDate = endDate,
-                pipeline = pipeline,
+                Pipeline = pipeline,
+                Participants = participants
+            };
+
+            foreach (Participant participant in participants)
+            {
+                sprint.Subscribe(participant);
+            }
+
+            return sprint;
+        }
+
+        public static ReviewSprint CreateReviewSprint(string name, DateTime startDate, DateTime endDate, List<Participant> participants, Pipeline.Pipeline? pipeline = null)
+        {
+
+            ReviewSprint sprint = new()
+            {
+                Name = name,
+                StartDate = startDate,
+                EndDate = endDate,
+                Pipeline = pipeline,
                 Participants = participants
             };
 

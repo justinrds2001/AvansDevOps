@@ -56,7 +56,8 @@ static ReleaseSprint MakeReleaseSprint()
         new AnalyseJob(),
         new PackageJob(),
         new TestJob(),
-        new BuildJob()
+        new BuildJob(),
+        new DeployJob()
     };
 
     Pipeline pipeline = new()
@@ -64,7 +65,7 @@ static ReleaseSprint MakeReleaseSprint()
         Jobs = jobs
     };
 
-    ReleaseSprint releaseSprint = SprintFactory.CreateSprint<ReleaseSprint>("Review Sprint", new DateTime(2024, 3, 23, 16, 23, 42, DateTimeKind.Utc), new DateTime(2024, 4, 23, 16, 23, 42, DateTimeKind.Utc), pipeline, list2);
+    ReleaseSprint releaseSprint = SprintFactory.CreateReleaseSprint("Review Sprint", new DateTime(2024, 3, 23, 16, 23, 42, DateTimeKind.Utc), new DateTime(2024, 4, 23, 16, 23, 42, DateTimeKind.Utc), list2, pipeline);
     foreach (var item in backlog.BacklogItems)
     {
         releaseSprint.AddBacklogItem(item);
@@ -78,10 +79,16 @@ static void RunCompositeVisitor()
     ScrumMaster scrummaster = new() { Name = "Ende Rest" };
     Developer developer = new() { Name = "Bobby" };
     Tester tester = new() { Name = "Ernst" };
+    BacklogItem backlogItem = new BacklogItem()
+    {
+        Title = "Implement composite pattern",
+        BacklogState = new TodoState(),
+    };
 
-    DiscussionThread discussionThread = new DiscussionThread(scrummaster) { 
+    DiscussionThread discussionThread = new DiscussionThread(scrummaster) {
         Title = "Code comments",
         Content = "What is the deal with the unnecessary amount of commented code?",
+        AssociatedBacklogItem = backlogItem
     };
 
     DiscussionThread parentMessage = new(developer) { Content = "That was our intern!" };
@@ -93,6 +100,10 @@ static void RunCompositeVisitor()
     parentMessage.Add(childMessage);
     parentMessage.Add(anotherParentMessage);
     anotherParentMessage.Add(anotherChildMessage);
+
+    backlogItem.BacklogState = new DoneState { BacklogItem = backlogItem };
+    Message anotherChildMessage2 = new(developer) { Content = "I will do that!" };
+    anotherParentMessage.Add(anotherChildMessage2);
 
     Console.WriteLine("Discussion Thread Content:");
 
@@ -215,6 +226,8 @@ static void RunSprintState()
     Console.WriteLine($"Transitioning to Active: {sprint.SprintState.GetType().Name}");
 
     Console.WriteLine();
+
+    sprint.AddBacklogItem(new BacklogItem() { Title = "Implement feature X" });
 
     // Test finishing the sprint
     Console.WriteLine($"Current state: {sprint.SprintState.GetType().Name}");
