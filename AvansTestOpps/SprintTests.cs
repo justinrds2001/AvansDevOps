@@ -207,7 +207,7 @@ namespace AvansDevOps.Tests
         {
             // Arrange
             ReleaseSprint sprint = MakeReleaseSprint();
-            
+
             // Act
             sprint.SprintState.StartSprint(sprint);
 
@@ -297,6 +297,59 @@ namespace AvansDevOps.Tests
 
             // Assert
             Assert.True(sprint.Participants[0].MessagesReceived > 0);
+        }
+
+        [Fact]
+        public void CancelSprint_From_CreatedState_Should_Not_Switch_State()
+        {
+            // Arrange
+            ReleaseSprint sprint = MakeReleaseSprint();
+
+            // Act
+            sprint.SprintState.CancelSprint(sprint);
+
+            // Assert
+            Assert.IsType<CreatedState>(sprint.SprintState);
+        }
+
+        [Fact]
+        public void CloseSprint_From_CreatedState_Should_Not_Switch_State()
+        {
+            // Arrange
+            ReleaseSprint sprint = MakeReleaseSprint();
+
+            // Act
+            sprint.SprintState.CloseSprint(sprint);
+
+            // Assert
+            Assert.IsType<CreatedState>(sprint.SprintState);
+        }
+
+        [Fact]
+        public void FinishSprint_From_CreatedState_Should_Not_Switch_State()
+        {
+            // Arrange
+            ReleaseSprint sprint = MakeReleaseSprint();
+
+            // Act
+            sprint.SprintState.FinishSprint(sprint);
+
+            // Assert
+            Assert.IsType<CreatedState>(sprint.SprintState);
+        }
+
+        [Fact]
+        public void StartSprint_From_FinishedState_Should_Not_Switch_State()
+        {
+            // Arrange
+            ReleaseSprint sprint = MakeReleaseSprint();
+            sprint.SprintState = new FinishedState();
+
+            // Act
+            sprint.SprintState.StartSprint(sprint);
+
+            // Assert
+            Assert.IsType<FinishedState>(sprint.SprintState);
         }
     }
 }
