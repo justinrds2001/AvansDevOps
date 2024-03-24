@@ -9,13 +9,14 @@ namespace AvansDevOps.ReportStrategy
     public class Pdf : IExportStrategy
     {
 
-        public void GenerateReport(Report report)
+        public bool GenerateReport(Report report)
         {
             Console.WriteLine("Generating PDF report...");
             Console.WriteLine("Header: " + report.Header);
             Console.WriteLine("Content: " + report.Content);
             Console.WriteLine("Footer: " + report.Footer);
             Console.WriteLine("PDF report generated.");
+            return true;
         }
     }
 }

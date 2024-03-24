@@ -8,13 +8,14 @@ namespace AvansDevOps.ReportStrategy
 {
     public class Png : IExportStrategy
     {
-        public void GenerateReport(Report report)
+        public bool GenerateReport(Report report)
         {
             Console.WriteLine("Generating PNG report...");
             Console.WriteLine("Header: " + report.Header);
             Console.WriteLine("Content: " + report.Content);
             Console.WriteLine("Footer: " + report.Footer);
             Console.WriteLine("PNG report generated.");
+            return true;
         }
     }
 }
