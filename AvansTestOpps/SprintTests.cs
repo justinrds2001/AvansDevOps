@@ -187,12 +187,14 @@ namespace AvansDevOps.Tests
             // Arrange
             ReleaseSprint sprint = MakeReleaseSprint();
             sprint.UpdateSprintState(new SprintState.ActiveState());
+            
             sprint.AllowChanges = false;
+
             BacklogItem backlogItem = new()
             {
-                Title = "Implement feature B",
+                Title = "Implement feature C",
                 Contributor = new Tester() { Name = "Bob" },
-                DefinitionOfDone = "Feature B is implemented",
+                DefinitionOfDone = "Feature C is implemented",
             };
 
             // Act

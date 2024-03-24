@@ -16,7 +16,7 @@ namespace AvansDevOps.ISprintFactory
         private Pipeline.Pipeline? pipeline;
         private List<Participant> participants = new List<Participant>();
         private bool allowChanges = true;
-        private string errorMessage = "Changes are not allowed.";
+        private readonly string errorMessage = "Changes are not allowed.";
 
         public string Name
         {

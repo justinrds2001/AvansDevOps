@@ -37,6 +37,7 @@ namespace AvansTestOpps
             item.BacklogState.ToTestReady(item);
             item.BacklogState.ToTesting(item);
             item.BacklogState.ToTested(item);
+            item.BacklogState.ToDoing(item);
             item.BacklogState.ToTestReady(item);
             item.BacklogState.ToTesting(item);
             item.BacklogState.ToTested(item);
