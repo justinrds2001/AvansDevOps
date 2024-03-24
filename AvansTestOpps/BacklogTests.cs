@@ -61,13 +61,14 @@ namespace AvansTestOpps
         public void TestersShouldGetNotifiedIfItemIsTestReady()
         {
             // Arrange
-            using var sw = new StringWriter();
-            Console.SetOut(sw);
-
             Tester tester = new() { Name = "John Doe" };
             Developer developer = new() { Name = "Steve" };
             BacklogItem item = new();
-            List<Participant> participants = new();
+            List<Participant> participants = new()
+            {
+                tester,
+                developer
+            };
             Sprint sprint = SprintFactory.CreateReviewSprint("Test", DateTime.Now, DateTime.Now, participants);
             sprint.AddBacklogItem(item);
 
@@ -75,8 +76,35 @@ namespace AvansTestOpps
             item.BacklogState.ToTestReady(item);
 
             // Assert
-            Assert.Contains($"{tester.Name} received message: Backlog item is ready for testing", sw.ToString());
-            Assert.DoesNotContain(developer.Name, sw.ToString());
+            Assert.Equal(1, tester.MessagesRecieved);
+            Assert.Equal(0, developer.MessagesRecieved);
+        }
+
+        [Fact]
+        public void ScrumMasterShouldGetNotifiedIfItemGoesBackToTodo()
+        {
+            // Arrange
+            Tester tester = new() { Name = "John Doe" };
+            Developer developer = new() { Name = "Steve" };
+            ScrumMaster scrumMaster = new() { Name = "Bryan" };
+            BacklogItem item = new();
+            List<Participant> participants = new()
+            {
+                tester,
+                developer,
+                scrumMaster
+            };
+            Sprint sprint = SprintFactory.CreateReviewSprint("Test", DateTime.Now, DateTime.Now, participants);
+            sprint.AddBacklogItem(item);
+
+            item.BacklogState.ToDoing(item);
+            item.BacklogState.ToTestReady(item);
+            item.BacklogState.ToTesting(item);
+            item.BacklogState.ToToDo(item);
+
+            // Assert
+            Assert.Equal(1, scrumMaster.MessagesRecieved);
+            Assert.Equal(0, developer.MessagesRecieved);
         }
     }
 }
