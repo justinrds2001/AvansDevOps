@@ -9,11 +9,11 @@ namespace AvansDevOps.Observer
     public abstract class Participant : ISubscriber
     {
         public string Name { get; set; } = string.Empty;
-        public int MessagesRecieved { get; set; } = 0;
+        public int MessagesReceived { get; set; } = 0;
 
         public void Update(string message)
         {
-            MessagesRecieved++;
+            MessagesReceived++;
             Console.WriteLine($"{Name} received message: {message}");
         }
     }

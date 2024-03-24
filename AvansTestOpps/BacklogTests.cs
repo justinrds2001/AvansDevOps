@@ -76,8 +76,8 @@ namespace AvansTestOpps
             item.BacklogState.ToTestReady(item);
 
             // Assert
-            Assert.Equal(1, tester.MessagesRecieved);
-            Assert.Equal(0, developer.MessagesRecieved);
+            Assert.Equal(1, tester.MessagesReceived);
+            Assert.Equal(0, developer.MessagesReceived);
         }
 
         [Fact]
@@ -103,8 +103,8 @@ namespace AvansTestOpps
             item.BacklogState.ToToDo(item);
 
             // Assert
-            Assert.Equal(1, scrumMaster.MessagesRecieved);
-            Assert.Equal(0, developer.MessagesRecieved);
+            Assert.Equal(1, scrumMaster.MessagesReceived);
+            Assert.Equal(0, developer.MessagesReceived);
         }
     }
 }

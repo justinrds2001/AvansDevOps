@@ -44,7 +44,7 @@ namespace AvansTestOpps
             // Arrange
             var participant = new Developer();
             var backlogItem = new BacklogItem();
-            backlogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = backlogItem });
+            backlogItem.UpdateBacklogItemState(new DoneState());
             var discussionThread = new DiscussionThread(participant);
             discussionThread.AssociatedBacklogItem = backlogItem;
             var reply = new Message(participant);
