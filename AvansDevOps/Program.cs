@@ -101,7 +101,7 @@ static void RunCompositeVisitor()
     parentMessage.Add(anotherParentMessage);
     anotherParentMessage.Add(anotherChildMessage);
 
-    backlogItem.BacklogState = new DoneState { BacklogItem = backlogItem };
+    backlogItem.BacklogState = new DoneState();
     Message anotherChildMessage2 = new(developer) { Content = "I will do that!" };
     anotherParentMessage.Add(anotherChildMessage2);
 
@@ -140,77 +140,74 @@ static void RunBacklogState(){
     ReleaseSprint sprint = MakeReleaseSprint();
     // Creating a new backlog item
     var backlogItem = sprint.Backlog.BacklogItems[0];
-
-    backlogItem.BacklogState = new TodoState { BacklogItem = backlogItem };
-
     // Test To-Do to Doing transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToDoing();
+    backlogItem.BacklogState.ToDoing(backlogItem);
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Doing to TestReady transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTestReady();
+    backlogItem.BacklogState.ToTestReady(backlogItem);
     Console.WriteLine($"Transitioning from Doing to TestReady: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test TestReady to Testing transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTesting();
+    backlogItem.BacklogState.ToTesting(backlogItem);
     Console.WriteLine($"Transitioning from TestReady to Testing: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Testing to Tested transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTested();
+    backlogItem.BacklogState.ToTested(backlogItem);
     Console.WriteLine($"Transitioning from Testing to Tested: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Tested to Done transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToDone();
+    backlogItem.BacklogState.ToDone(backlogItem);
     Console.WriteLine($"Transitioning from Tested to Done: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Done to TestReady transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTestReady();
+    backlogItem.BacklogState.ToTestReady(backlogItem);
     Console.WriteLine($"Transitioning from Done to TestReady: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
-    backlogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = backlogItem });
+    backlogItem.UpdateBacklogItemState(new TestReadyState());
 
     // Test TestReady to Testing transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTesting();
+    backlogItem.BacklogState.ToTesting(backlogItem);
     Console.WriteLine($"Transitioning from TestReady to Testing: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Testing to To-Do transition
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToToDo();
+    backlogItem.BacklogState.ToToDo(backlogItem);
     Console.WriteLine($"Transitioning from Testing to ToDo: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test To-Do to Doing transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToDoing();
+    backlogItem.BacklogState.ToDoing(backlogItem);
     Console.WriteLine($"Transitioning from ToDo to Doing: {backlogItem.BacklogState.GetType().Name}");
 
     Console.WriteLine();
 
     // Test Doing to TestReady transition again
     Console.WriteLine($"Current state: {backlogItem.BacklogState.GetType().Name}");
-    backlogItem.BacklogState.ToTestReady();
+    backlogItem.BacklogState.ToTestReady(backlogItem);
     Console.WriteLine($"Transitioning from Doing to TestReady: {backlogItem.BacklogState.GetType().Name}");
 }
 

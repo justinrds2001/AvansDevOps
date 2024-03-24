@@ -1,4 +1,5 @@
 ﻿using AvansDevOps.Observer;
+using AvansDevOps.Observer.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,14 @@ namespace AvansDevOps.BacklogState
 {
     public class TestedState : BacklogState
     {
-        public override void ToDone()
+        public override void ToDone(BacklogItem item)
         {
-            BacklogItem.UpdateBacklogItemState(new DoneState() { BacklogItem = BacklogItem });
+            item.UpdateBacklogItemState(new DoneState());
         }
-        public override void ToTestReady()
+        public override void ToTestReady(BacklogItem item)
         {
-            // Notify developers
-            Console.WriteLine("Notifying developers...");
-            BacklogItem.UpdateBacklogItemState(new TestReadyState() { BacklogItem = BacklogItem });
+            item.Sprint?.NotifySpecificParticipant<Tester>("Backlog item is ready for testing: " + item.Title);
+            item.UpdateBacklogItemState(new TestReadyState());
         }
     }
 }

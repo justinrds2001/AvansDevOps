@@ -9,9 +9,9 @@ namespace AvansDevOps.BacklogState
 {
     public class TodoState : BacklogState
     {
-        public override void ToDoing()
+        public override void ToDoing(BacklogItem item)
         {
-            base.BacklogItem.UpdateBacklogItemState(new DoingState() { BacklogItem = BacklogItem});
+            item.UpdateBacklogItemState(new DoingState());
         }
     }
 }
